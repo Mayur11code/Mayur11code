@@ -1,0 +1,8 @@
+{
+  "name": "mayur11code-profile",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "generate:contributions": "node scripts/generate-contributions.mjs"
+  }
+}

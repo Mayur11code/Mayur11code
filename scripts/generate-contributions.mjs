@@ -117,55 +117,60 @@ function sleep(ms) {
 
 // ─── Data Pipeline ──────────────────────────────────────────────────────────
 
-async function fetchFullYearContributions() {
+async function fetchRollingContributions() {
   const now = new Date();
-  const yearStart = new Date(now.getFullYear(), 0, 1);
-  const yearEnd = new Date(now.getFullYear(), 11, 31, 23, 59, 59);
+  const endDate = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59);
+  const startDate = new Date(now.getFullYear() - 1, now.getMonth(), now.getDate());
+  const cutoff = now.toISOString().split("T")[0];
 
   // Split into two 6-month windows to avoid resource limits
-  const midYear = new Date(now.getFullYear(), 6, 1);
+  const midDate = new Date(startDate.getTime() + (endDate.getTime() - startDate.getTime()) / 2);
 
   console.log(`Fetching contributions for ${USERNAME}...`);
+  console.log(`  Period: ${startDate.toISOString().split("T")[0]} \u2192 ${cutoff}`);
 
   let allWeeks = [];
   let totalContributions = 0;
 
   try {
-    // Window 1: Jan – Jun
+    // Window 1: start \u2013 mid
     const cal1 = await fetchContributions(
-      yearStart.toISOString(),
-      new Date(midYear.getTime() - 1000).toISOString()
+      startDate.toISOString(),
+      midDate.toISOString()
     );
     allWeeks.push(...cal1.weeks);
     totalContributions += cal1.totalContributions;
-    console.log(`  Window 1 (Jan–Jun): ${cal1.totalContributions} contributions`);
+    console.log(`  Window 1: ${cal1.totalContributions} contributions`);
 
     await sleep(1000); // Respect secondary rate limit
 
-    // Window 2: Jul – Dec
+    // Window 2: mid \u2013 end
     const cal2 = await fetchContributions(
-      midYear.toISOString(),
-      yearEnd.toISOString()
+      new Date(midDate.getTime() + 1000).toISOString(),
+      endDate.toISOString()
     );
     allWeeks.push(...cal2.weeks);
     totalContributions += cal2.totalContributions;
-    console.log(`  Window 2 (Jul–Dec): ${cal2.totalContributions} contributions`);
+    console.log(`  Window 2: ${cal2.totalContributions} contributions`);
   } catch (err) {
     console.warn(`Split-window fetch failed: ${err.message}`);
-    console.warn("Falling back to default past-year range...");
+    console.warn("Falling back to rolling 12-month range...");
 
-    const cal = await fetchContributions(
-      new Date(now.getTime() - 365 * 24 * 60 * 60 * 1000).toISOString(),
-      now.toISOString()
-    );
+    const cal = await fetchContributions(startDate.toISOString(), endDate.toISOString());
     allWeeks = cal.weeks;
     totalContributions = cal.totalContributions;
     console.log(`  Fallback: ${cal.totalContributions} contributions`);
   }
 
-  console.log(`Total: ${totalContributions} contributions across ${allWeeks.length} weeks`);
+  // Clip all contribution days to today — no future dates
+  for (const week of allWeeks) {
+    week.contributionDays = week.contributionDays.filter((day) => day.date <= cutoff);
+  }
+  const filteredWeeks = allWeeks.filter((w) => w.contributionDays.length > 0);
 
-  return { weeks: allWeeks, totalContributions };
+  console.log(`Total: ${totalContributions} contributions across ${filteredWeeks.length} weeks`);
+
+  return { weeks: filteredWeeks, totalContributions };
 }
 
 // ─── SVG Renderer ───────────────────────────────────────────────────────────
@@ -249,7 +254,7 @@ ${labels}
 
 async function main() {
   try {
-    const { weeks, totalContributions } = await fetchFullYearContributions();
+    const { weeks, totalContributions } = await fetchRollingContributions();
 
     if (!weeks.length) {
       console.warn("No week data received. Generating empty histogram.");

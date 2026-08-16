@@ -1,4 +1,4 @@
-name: Update Contribution Histogram
+name: Update Profile
 
 on:
   schedule:
@@ -26,14 +26,27 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: node scripts/generate-contributions.mjs
 
+      - name: Embed live visitor counter in vinyl
+        run: |
+          curl -sL "https://komarev.com/ghpvc/?username=Mayur11code&style=flat&label=&color=96999d&labelColor=08090b&background=08090b" -o /tmp/badge.png
+          if [ -s /tmp/badge.png ]; then
+            BADGE_B64=$(base64 -w0 /tmp/badge.png)
+            # Replace placeholder with embedded base64 badge image
+            sed -i "s|<!--KOMAREV_BADGE-->|<image x=\"172\" y=\"188\" width=\"56\" height=\"24\" href=\"data:image/png;base64,${BADGE_B64}\" />|" assets/vinyl.svg
+            echo "Visitor counter embedded in vinyl.svg"
+          else
+            echo "Warning: Failed to fetch badge, vinyl will render without counter"
+            sed -i 's|<!--KOMAREV_BADGE-->||' assets/vinyl.svg
+          fi
+
       - name: Commit if changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add assets/contributions.svg
+          git add assets/contributions.svg assets/vinyl.svg
           if git diff --staged --quiet; then
             echo "No changes to commit."
           else
-            git commit -m "chore: update contribution histogram"
+            git commit -m "chore: update contribution histogram and visitor counter"
             git push
           fi

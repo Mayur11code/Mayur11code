@@ -1,101 +1,102 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
   <defs>
-    <!-- Subtle grain texture -->
     <filter id="grain" x="0%" y="0%" width="100%" height="100%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="4" stitchTiles="stitch" result="n"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch" result="n"/>
       <feColorMatrix type="saturate" values="0" in="n" result="g"/>
       <feBlend in="SourceGraphic" in2="g" mode="multiply"/>
     </filter>
-    <!-- Off-center light reflection -->
-    <radialGradient id="refl" cx="42%" cy="38%" r="50%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.035"/>
-      <stop offset="60%" stop-color="#ffffff" stop-opacity="0.01"/>
+    <radialGradient id="refl" cx="40%" cy="36%" r="52%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.04"/>
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.015"/>
       <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
     </radialGradient>
+    <!-- Mask to cut transparent center hole for badge -->
+    <mask id="center-mask">
+      <rect width="400" height="400" fill="white"/>
+      <circle cx="200" cy="200" r="30" fill="black"/>
+    </mask>
   </defs>
 
   <!-- === BODY === -->
-  <circle cx="200" cy="200" r="196" fill="#0d0f12"/>
-  <circle cx="200" cy="200" r="194" fill="#111316"/>
+  <circle cx="200" cy="200" r="197" fill="#08090b"/>
+  <circle cx="200" cy="200" r="195" fill="#0e1013"/>
 
   <!-- Raised outer rim -->
-  <circle cx="200" cy="200" r="192" fill="none" stroke="#25282d" stroke-width="1.5" opacity="0.5"/>
-  <circle cx="200" cy="200" r="190" fill="none" stroke="#1a1d21" stroke-width="0.5" opacity="0.7"/>
+  <circle cx="200" cy="200" r="193" fill="none" stroke="#292c30" stroke-width="1.2" opacity="0.5"/>
+  <circle cx="200" cy="200" r="191" fill="none" stroke="#1a1d21" stroke-width="0.6" opacity="0.6"/>
 
-  <!-- === GROOVE FIELD === -->
-  <!-- Zone 1: Outer (r=188 to r=145) — dense, fine grooves -->
-  <circle cx="200" cy="200" r="188" fill="none" stroke="#1e2126" stroke-width="0.4" opacity="0.6"/>
-  <circle cx="200" cy="200" r="183" fill="none" stroke="#25282d" stroke-width="0.5" opacity="0.35"/>
-  <circle cx="200" cy="200" r="178" fill="none" stroke="#1e2126" stroke-width="0.4" opacity="0.5"/>
-  <circle cx="200" cy="200" r="174" fill="none" stroke="#2a2d32" stroke-width="0.6" opacity="0.3"/>
-  <circle cx="200" cy="200" r="170" fill="none" stroke="#1e2126" stroke-width="0.4" opacity="0.55"/>
-  <circle cx="200" cy="200" r="166" fill="none" stroke="#25282d" stroke-width="0.5" opacity="0.4"/>
-  <circle cx="200" cy="200" r="162" fill="none" stroke="#1e2126" stroke-width="0.4" opacity="0.45"/>
-  <circle cx="200" cy="200" r="158" fill="none" stroke="#2a2d32" stroke-width="0.6" opacity="0.3"/>
-  <circle cx="200" cy="200" r="154" fill="none" stroke="#1e2126" stroke-width="0.4" opacity="0.5"/>
-  <circle cx="200" cy="200" r="150" fill="none" stroke="#25282d" stroke-width="0.5" opacity="0.35"/>
-  <circle cx="200" cy="200" r="146" fill="none" stroke="#1e2126" stroke-width="0.4" opacity="0.45"/>
+  <!-- === GROOVE FIELD (masked to preserve transparent center) === -->
+  <g mask="url(#center-mask)">
+    <!-- Base fill -->
+    <circle cx="200" cy="200" r="189" fill="#0e1013"/>
 
-  <!-- Zone 2: Middle (r=142 to r=95) — medium density, slight visual break -->
-  <circle cx="200" cy="200" r="142" fill="none" stroke="#1e2126" stroke-width="0.5" opacity="0.5"/>
-  <circle cx="200" cy="200" r="137" fill="none" stroke="#2a2d32" stroke-width="0.6" opacity="0.35"/>
-  <circle cx="200" cy="200" r="132" fill="none" stroke="#1e2126" stroke-width="0.4" opacity="0.55"/>
-  <circle cx="200" cy="200" r="127" fill="none" stroke="#25282d" stroke-width="0.5" opacity="0.4"/>
-  <circle cx="200" cy="200" r="122" fill="none" stroke="#1e2126" stroke-width="0.4" opacity="0.5"/>
-  <circle cx="200" cy="200" r="117" fill="none" stroke="#2a2d32" stroke-width="0.6" opacity="0.3"/>
-  <circle cx="200" cy="200" r="112" fill="none" stroke="#1e2126" stroke-width="0.4" opacity="0.55"/>
-  <circle cx="200" cy="200" r="107" fill="none" stroke="#25282d" stroke-width="0.5" opacity="0.4"/>
-  <circle cx="200" cy="200" r="102" fill="none" stroke="#1e2126" stroke-width="0.4" opacity="0.5"/>
-  <circle cx="200" cy="200" r="97" fill="none" stroke="#2a2d32" stroke-width="0.6" opacity="0.35"/>
+    <!-- Zone 1: Outer (r=188 to r=142) — dense, fine grooves -->
+    <circle cx="200" cy="200" r="188" fill="none" stroke="#292c30" stroke-width="0.5" opacity="0.55"/>
+    <circle cx="200" cy="200" r="184" fill="none" stroke="#292c30" stroke-width="0.4" opacity="0.4"/>
+    <circle cx="200" cy="200" r="180" fill="none" stroke="#45484c" stroke-width="0.3" opacity="0.2"/>
+    <circle cx="200" cy="200" r="176" fill="none" stroke="#292c30" stroke-width="0.5" opacity="0.5"/>
+    <circle cx="200" cy="200" r="172" fill="none" stroke="#45484c" stroke-width="0.35" opacity="0.15"/>
+    <circle cx="200" cy="200" r="168" fill="none" stroke="#292c30" stroke-width="0.5" opacity="0.45"/>
+    <circle cx="200" cy="200" r="164" fill="none" stroke="#292c30" stroke-width="0.4" opacity="0.35"/>
+    <circle cx="200" cy="200" r="160" fill="none" stroke="#45484c" stroke-width="0.3" opacity="0.2"/>
+    <circle cx="200" cy="200" r="156" fill="none" stroke="#292c30" stroke-width="0.5" opacity="0.5"/>
+    <circle cx="200" cy="200" r="152" fill="none" stroke="#292c30" stroke-width="0.4" opacity="0.3"/>
+    <circle cx="200" cy="200" r="148" fill="none" stroke="#45484c" stroke-width="0.35" opacity="0.18"/>
+    <circle cx="200" cy="200" r="144" fill="none" stroke="#292c30" stroke-width="0.5" opacity="0.45"/>
 
-  <!-- Zone 3: Inner (r=92 to r=62) — dense again approaching label -->
-  <circle cx="200" cy="200" r="92" fill="none" stroke="#1e2126" stroke-width="0.4" opacity="0.5"/>
-  <circle cx="200" cy="200" r="87" fill="none" stroke="#25282d" stroke-width="0.5" opacity="0.4"/>
-  <circle cx="200" cy="200" r="82" fill="none" stroke="#1e2126" stroke-width="0.4" opacity="0.55"/>
-  <circle cx="200" cy="200" r="77" fill="none" stroke="#2a2d32" stroke-width="0.6" opacity="0.3"/>
-  <circle cx="200" cy="200" r="72" fill="none" stroke="#1e2126" stroke-width="0.4" opacity="0.5"/>
-  <circle cx="200" cy="200" r="67" fill="none" stroke="#25282d" stroke-width="0.5" opacity="0.4"/>
-  <circle cx="200" cy="200" r="62" fill="none" stroke="#1e2126" stroke-width="0.4" opacity="0.5"/>
+    <!-- Zone 2: Middle (r=140 to r=96) — visual break, slightly wider spacing -->
+    <circle cx="200" cy="200" r="140" fill="none" stroke="#292c30" stroke-width="0.5" opacity="0.4"/>
+    <circle cx="200" cy="200" r="135" fill="none" stroke="#45484c" stroke-width="0.35" opacity="0.18"/>
+    <circle cx="200" cy="200" r="130" fill="none" stroke="#292c30" stroke-width="0.5" opacity="0.5"/>
+    <circle cx="200" cy="200" r="125" fill="none" stroke="#292c30" stroke-width="0.4" opacity="0.35"/>
+    <circle cx="200" cy="200" r="120" fill="none" stroke="#45484c" stroke-width="0.3" opacity="0.22"/>
+    <circle cx="200" cy="200" r="115" fill="none" stroke="#292c30" stroke-width="0.5" opacity="0.45"/>
+    <circle cx="200" cy="200" r="110" fill="none" stroke="#292c30" stroke-width="0.4" opacity="0.3"/>
+    <circle cx="200" cy="200" r="105" fill="none" stroke="#45484c" stroke-width="0.35" opacity="0.18"/>
+    <circle cx="200" cy="200" r="100" fill="none" stroke="#292c30" stroke-width="0.5" opacity="0.5"/>
+    <circle cx="200" cy="200" r="96" fill="none" stroke="#292c30" stroke-width="0.4" opacity="0.35"/>
 
-  <!-- Subtle groove depth bands (filled zones between groove clusters) -->
-  <circle cx="200" cy="200" r="185" fill="#0f1114" opacity="0.4"/>
-  <circle cx="200" cy="200" r="165" fill="#111316" opacity="0.25"/>
-  <circle cx="200" cy="200" r="145" fill="#0f1114" opacity="0.35"/>
-  <circle cx="200" cy="200" r="125" fill="#111316" opacity="0.25"/>
-  <circle cx="200" cy="200" r="105" fill="#0f1114" opacity="0.35"/>
-  <circle cx="200" cy="200" r="85" fill="#111316" opacity="0.25"/>
-  <circle cx="200" cy="200" r="65" fill="#0f1114" opacity="0.3"/>
+    <!-- Zone 3: Inner (r=92 to r=60) — dense approaching label -->
+    <circle cx="200" cy="200" r="92" fill="none" stroke="#292c30" stroke-width="0.5" opacity="0.5"/>
+    <circle cx="200" cy="200" r="88" fill="none" stroke="#45484c" stroke-width="0.35" opacity="0.2"/>
+    <circle cx="200" cy="200" r="84" fill="none" stroke="#292c30" stroke-width="0.5" opacity="0.45"/>
+    <circle cx="200" cy="200" r="80" fill="none" stroke="#292c30" stroke-width="0.4" opacity="0.35"/>
+    <circle cx="200" cy="200" r="76" fill="none" stroke="#45484c" stroke-width="0.3" opacity="0.2"/>
+    <circle cx="200" cy="200" r="72" fill="none" stroke="#292c30" stroke-width="0.5" opacity="0.5"/>
+    <circle cx="200" cy="200" r="68" fill="none" stroke="#292c30" stroke-width="0.4" opacity="0.35"/>
+    <circle cx="200" cy="200" r="64" fill="none" stroke="#45484c" stroke-width="0.35" opacity="0.18"/>
+    <circle cx="200" cy="200" r="60" fill="none" stroke="#292c30" stroke-width="0.5" opacity="0.45"/>
 
-  <!-- === LEAD-IN GROOVE (thicker ring near edge) === -->
-  <circle cx="200" cy="200" r="190" fill="none" stroke="#3b3e43" stroke-width="0.8" opacity="0.25"/>
+    <!-- Subtle depth bands -->
+    <circle cx="200" cy="200" r="186" fill="#0b0d0f" opacity="0.3"/>
+    <circle cx="200" cy="200" r="166" fill="#0e1013" opacity="0.2"/>
+    <circle cx="200" cy="200" r="146" fill="#0b0d0f" opacity="0.25"/>
+    <circle cx="200" cy="200" r="126" fill="#0e1013" opacity="0.2"/>
+    <circle cx="200" cy="200" r="106" fill="#0b0d0f" opacity="0.25"/>
+    <circle cx="200" cy="200" r="86" fill="#0e1013" opacity="0.2"/>
+    <circle cx="200" cy="200" r="66" fill="#0b0d0f" opacity="0.25"/>
 
-  <!-- === DEAD WAX (smooth area before label) === -->
-  <circle cx="200" cy="200" r="59" fill="#111316"/>
-  <circle cx="200" cy="200" r="58" fill="none" stroke="#25282d" stroke-width="0.4" opacity="0.6"/>
+    <!-- Lead-in groove -->
+    <circle cx="200" cy="200" r="191" fill="none" stroke="#45484c" stroke-width="0.8" opacity="0.2"/>
 
-  <!-- === CENTER LABEL === -->
-  <circle cx="200" cy="200" r="54" fill="#15171a"/>
-  <circle cx="200" cy="200" r="53.5" fill="none" stroke="#3b3e43" stroke-width="0.3" opacity="0.4"/>
+    <!-- Dead wax ring -->
+    <circle cx="200" cy="200" r="58" fill="#0e1013"/>
+    <circle cx="200" cy="200" r="57" fill="none" stroke="#292c30" stroke-width="0.4" opacity="0.5"/>
 
-  <!-- Label detail rings -->
-  <circle cx="200" cy="200" r="44" fill="none" stroke="#25282d" stroke-width="0.25" opacity="0.35"/>
-  <circle cx="200" cy="200" r="34" fill="none" stroke="#1e2126" stroke-width="0.2" opacity="0.3"/>
+    <!-- Center label base (matches page background so badge blends) -->
+    <circle cx="200" cy="200" r="55" fill="#08090b"/>
+    <circle cx="200" cy="200" r="54.5" fill="none" stroke="#292c30" stroke-width="0.3" opacity="0.3"/>
+  </g>
 
-  <!-- === SPINDLE HOLE === -->
-  <circle cx="200" cy="200" r="3.5" fill="#08090b"/>
-  <circle cx="200" cy="200" r="4" fill="none" stroke="#3b3e43" stroke-width="0.25" opacity="0.5"/>
+  <!-- Spindle hole (tiny dot behind badge) -->
+  <circle cx="200" cy="200" r="2.5" fill="#08090b" opacity="0.8"/>
 
-  <!-- === LABEL TEXT === -->
-  <text x="200" y="197" text-anchor="middle" dominant-baseline="auto"
-    font-family="Georgia, 'Times New Roman', serif" font-size="13"
-    fill="#96999d" letter-spacing="0.5">02:37</text>
-  <text x="200" y="213" text-anchor="middle" dominant-baseline="auto"
-    font-family="'Courier New', 'Lucida Console', monospace" font-size="6"
-    fill="#686b70" letter-spacing="2.5">SIDE A</text>
+  <!-- === VISITOR COUNT (base64 badge embedded by GitHub Action) === -->
+  <!--KOMAREV_BADGE-->
 
   <!-- === LIGHT REFLECTION === -->
-  <circle cx="200" cy="200" r="192" fill="url(#refl)"/>
+  <circle cx="200" cy="200" r="193" fill="url(#refl)"/>
 
   <!-- === GRAIN OVERLAY === -->
-  <circle cx="200" cy="200" r="196" fill="#686b70" opacity="0.018" filter="url(#grain)"/>
+  <circle cx="200" cy="200" r="197" fill="#45484c" opacity="0.015" filter="url(#grain)"/>
 </svg>

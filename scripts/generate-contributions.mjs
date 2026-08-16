@@ -173,14 +173,14 @@ async function fetchFullYearContributions() {
 const MONTHS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
 
 function renderHistogram(weeks) {
-  const barWidth = 4;
-  const barGap = 1.5;
-  const svgHeight = 120;
-  const labelHeight = 22;
+  const barWidth = 3;
+  const barGap = 2;
+  const svgHeight = 100;
+  const labelHeight = 18;
   const barAreaHeight = svgHeight - labelHeight;
-  const maxBarHeight = barAreaHeight - 8;
+  const maxBarHeight = barAreaHeight - 4;
   const paddingX = 2;
-  const paddingY = 4;
+  const paddingY = 2;
 
   const svgWidth = weeks.length * (barWidth + barGap) + paddingX * 2;
 
@@ -203,39 +203,41 @@ function renderHistogram(weeks) {
     }
   }
 
-  // Build SVG
+  // Build bars — use the dark monochrome palette
+  // Low activity: #3b3e43, High activity: #c5c7ca
   const bars = weeklyCounts
     .map((count, i) => {
       const height = Math.max(1, (count / maxCount) * maxBarHeight);
       const x = paddingX + i * (barWidth + barGap);
       const y = paddingY + (maxBarHeight - height);
-      const opacity = count === 0 ? 0.15 : 0.4 + (count / maxCount) * 0.6;
-      return `  <rect x="${x}" y="${y}" width="${barWidth}" height="${height}" fill="#d0d0d0" opacity="${opacity.toFixed(2)}" rx="0.5"/>`;
+      const t = count === 0 ? 0 : count / maxCount;
+      // Map t (0..1) to color between #3b3e43 and #c5c7ca
+      const r = Math.round(0x3b + t * (0xc5 - 0x3b));
+      const g = Math.round(0x3e + t * (0xc7 - 0x3e));
+      const b = Math.round(0x43 + t * (0xca - 0x43));
+      const hex = `#${r.toString(16).padStart(2, "0")}${g.toString(16).padStart(2, "0")}${b.toString(16).padStart(2, "0")}`;
+      const opacity = count === 0 ? 0.3 : 0.5 + t * 0.5;
+      return `  <rect x="${x}" y="${y}" width="${barWidth}" height="${height}" fill="${hex}" opacity="${opacity.toFixed(2)}" rx="0.5"/>`;
     })
     .join("\n");
 
+  // Month labels — positioned at the first week of each month
   const labels = monthLabels
     .map(({ month, index }) => {
       const x = paddingX + index * (barWidth + barGap) + barWidth / 2;
-      return `  <text x="${x}" y="${svgHeight - 2}" font-family="'Courier New', 'Lucida Console', monospace" font-size="7" fill="#555555" text-anchor="middle" letter-spacing="0.5">${MONTHS[month]}</text>`;
+      return `  <text x="${x}" y="${svgHeight - 1}" font-family="'Courier New', 'Lucida Console', monospace" font-size="6.5" fill="#686b70" text-anchor="middle" letter-spacing="1">${MONTHS[month]}</text>`;
     })
     .join("\n");
 
-  // Thin month divider lines
-  const dividers = monthLabels
-    .filter((m) => m.index > 0)
-    .map(({ index }) => {
-      const x = paddingX + index * (barWidth + barGap) - barGap / 2;
-      return `  <line x1="${x}" y1="0" x2="${x}" y2="${svgHeight - labelHeight}" stroke="#2a2a2a" stroke-width="0.3"/>`;
-    })
-    .join("\n");
+  // Thin baseline
+  const baseline = `  <line x1="0" y1="${paddingY + maxBarHeight}" x2="${svgWidth}" y2="${paddingY + maxBarHeight}" stroke="#25282d" stroke-width="0.5" opacity="0.6"/>`;
 
-  // Contribution count label
-  const totalText = `  <text x="${svgWidth / 2}" y="-6" font-family="'Courier New', 'Lucida Console', monospace" font-size="7" fill="#555555" text-anchor="middle" letter-spacing="1">CONTRIBUTIONS</text>`;
+  // Quiet title
+  const title = `  <text x="${svgWidth / 2}" y="-5" font-family="'Courier New', 'Lucida Console', monospace" font-size="6.5" fill="#686b70" text-anchor="middle" letter-spacing="2">C O N T R I B U T I O N S</text>`;
 
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -14 ${svgWidth} ${svgHeight + 14}" width="100%" preserveAspectRatio="none">
-${totalText}
-${dividers}
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -12 ${svgWidth} ${svgHeight + 12}" width="100%" preserveAspectRatio="none">
+${title}
+${baseline}
 ${bars}
 ${labels}
 </svg>`;

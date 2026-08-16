@@ -2,28 +2,38 @@
 
 # <sub>M A Y U R</sub> <sup>N A N D A</sup>
 
-### `systems` · `software` · `intelligence`
+<br>
+
+**systems · software · intelligence**
 
 <br>
 
 <table>
 <tr>
-<td width="50%" valign="middle">
+<td width="55%" valign="middle">
 
 <i>"i like understanding how things work,<br>then making them work differently."</i>
 
-<br><br>
+<br>
 
 currently exploring distributed systems,<br>AI, and developer tools.
 
-<br><br>
+<br>
 
-`forge` · `funcundo` · `rammy` · `custos`
+forge · funcundo · rammy · custos
+
+<br>
+
+Delhi, India · building quietly.
 
 </td>
-<td width="50%" align="center">
+<td width="45%" align="center" valign="middle">
 
-<img src="assets/vinyl.svg" width="220" alt="vinyl record">
+<img src="assets/vinyl.svg" width="280" alt="vinyl record">
+
+<br>
+
+<img src="https://komarev.com/ghpvc/?username=Mayur11code&style=flat&color=96999d&label=&labelColor=15171a&background=15171a" alt="">
 
 </td>
 </tr>
@@ -31,18 +41,6 @@ currently exploring distributed systems,<br>AI, and developer tools.
 
 <br>
 
----
-
-<br>
-
 <img src="assets/contributions.svg" width="100%" alt="contribution activity">
-
-<br>
-
-Delhi, India · building quietly.
-
-<br><br>
-
-<img src="https://komarev.com/ghpvc/?username=Mayur11code&style=flat-square&color=8a8a8e&label=" alt="">
 
 </div>

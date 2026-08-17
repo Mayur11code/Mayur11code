@@ -19,8 +19,7 @@ Delhi, India · building quietly.
 </td>
 <td width="45%" align="center" valign="middle">
 
-<!-- POC: testing animated SVG on GitHub -->
-<img src="assets/animated-vinyl-poc.svg" width="260" alt="animated vinyl record with profile view count">
+<img src="assets/animated-vinyl-poc.svg" width="280" alt="rotating vinyl record with profile view count">
 
 </td>
 </tr>

@@ -25,6 +25,6 @@ Delhi, India · building quietly.
 </tr>
 </table>
 
-<img src="https://mayur11code.vercel.app/contributions.svg" width="100%" alt="contribution activity">
+<img src="https://mayur11code.vercel.app/api/contributions" width="100%" alt="contribution activity">
 
 </div>

@@ -2,10 +2,12 @@
   "version": 2,
   "builds": [
     { "src": "api/vinyl.js", "use": "@vercel/node" },
-    { "src": "api/vinyl-test.js", "use": "@vercel/node" }
+    { "src": "api/vinyl-test.js", "use": "@vercel/node" },
+    { "src": "api/contributions.js", "use": "@vercel/node" }
   ],
   "routes": [
     { "src": "/api/vinyl-test", "dest": "/api/vinyl-test.js" },
-    { "src": "/api/vinyl", "dest": "/api/vinyl.js" }
+    { "src": "/api/vinyl", "dest": "/api/vinyl.js" },
+    { "src": "/api/contributions", "dest": "/api/contributions.js" }
   ]
 }

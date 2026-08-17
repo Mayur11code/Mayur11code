@@ -26,27 +26,23 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: node scripts/generate-contributions.mjs
 
-      - name: Render contribution histogram to PNG
-        run: |
-          sudo apt-get update -qq && sudo apt-get install -y -qq librsvg2-bin > /dev/null 2>&1
-          rsvg-convert -w 1208 -o assets/contributions.png assets/contributions.svg
-          echo "PNG rendered ($(wc -c < assets/contributions.png) bytes)"
+      - name: Publish contribution SVG to Vercel
+        run: cp assets/contributions.svg mayur-vinyl/public/contributions.svg
 
-      - name: Bust GitHub image cache
+      - name: Bust vinyl image cache
         run: |
           ts=$(date +%s)
           sed -i "s|api/vinyl[^\"']*\([\"']\)|api/vinyl?v=$ts\1|g" README.md
-          sed -i "s|contributions\.png[^\"']*\([\"']\)|contributions.png?v=$ts\1|g" README.md
 
       - name: Commit and push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add assets/contributions.svg assets/contributions.png README.md
+          git add assets/contributions.svg mayur-vinyl/public/contributions.svg README.md
           if git diff --staged --quiet; then
             echo "No changes to commit."
           else
-            git commit -m "chore: update contributions + bust image cache"
+            git commit -m "chore: update contributions"
             git pull --rebase origin main
             git push --force-with-lease origin main
           fi

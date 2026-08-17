@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "api/vinyl.js", "use": "@vercel/node" }
+  ],
+  "routes": [
+    { "src": "/api/vinyl", "dest": "/api/vinyl.js" }
+  ]
+}

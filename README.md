@@ -1,8 +1,8 @@
 <div align="center">
 
-# M A Y U R &nbsp; N A N D A
+# *M A Y U R &nbsp; N A N D A*
 
-**systems · software · intelligence**
+*systems · software · intelligence*
 
 <table>
 <tr>

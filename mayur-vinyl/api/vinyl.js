@@ -138,18 +138,13 @@ function renderVinyl(count) {
 }
 
 export default async function handler(req, res) {
-  try {
-    const count = await redis.incr("gh-profile-views");
-    const svg = renderVinyl(count);
+  const count = await redis.incr("gh-profile-views");
+  const svg = renderVinyl(count);
 
-    res.setHeader("Content-Type", "image/svg+xml");
-    res.setHeader("Cache-Control", "no-store, no-cache, max-age=0, must-revalidate");
-    res.setHeader("CDN-Cache-Control", "no-store");
-    res.setHeader("Pragma", "no-cache");
-    res.setHeader("Expires", "0");
-    res.status(200).send(svg);
-  } catch (e) {
-    res.setHeader("Content-Type", "text/plain");
-    res.status(500).send(`Error: ${e.message}`);
-  }
+  res.setHeader("Content-Type", "image/svg+xml");
+  res.setHeader("Cache-Control", "no-store, no-cache, max-age=0, must-revalidate");
+  res.setHeader("CDN-Cache-Control", "no-store");
+  res.setHeader("Pragma", "no-cache");
+  res.setHeader("Expires", "0");
+  res.status(200).send(svg);
 }

@@ -1,26 +1,9 @@
-async function fetchCount() {
-  try {
-    const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), 5000);
-    const res = await fetch(
-      "https://komarev.com/ghpvc/?username=Mayur11code&format=svg",
-      { signal: controller.signal }
-    );
-    clearTimeout(timer);
-    if (!res.ok) throw new Error(`Komarev ${res.status}`);
-    const svg = await res.text();
-    const m = svg.match(/<text[^>]*>([\d,]+)<\/text>/);
-    const count = m ? m[1].replace(/,/g, "") : null;
-    console.log(`COUNTER_SOURCE=komarev`);
-    console.log(`COUNTER_VALUE=${count || "\u2014"}`);
-    return count;
-  } catch (e) {
-    console.error(`Komarev fetch failed: ${e.message}`);
-    console.log(`COUNTER_SOURCE=komarev`);
-    console.log(`COUNTER_VALUE=error`);
-    return "\u2014";
-  }
-}
+import { Redis } from "@upstash/redis";
+
+const redis = new Redis({
+  url: process.env.UPSTASH_REDIS_REST_URL,
+  token: process.env.UPSTASH_REDIS_REST_TOKEN,
+});
 
 function escapeXml(s) {
   return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -155,7 +138,7 @@ function renderVinyl(count) {
 }
 
 export default async function handler(req, res) {
-  const count = await fetchCount();
+  const count = await redis.incr("gh-profile-views");
   const svg = renderVinyl(count);
 
   res.setHeader("Content-Type", "image/svg+xml");

@@ -32,7 +32,7 @@ jobs:
 
           rsvg-convert -w 800 -h 800 assets/vinyl-template.svg -o /tmp/vinyl_base.png
 
-          curl -sL "https://komarev.com/ghpvc/?username=Mayur11code&style=flat-square&label=VIEWS&color=292c30&labelColor=08090b&background=08090b" -o /tmp/badge.svg
+          curl -sL "https://komarev.com/ghpvc/?username=Mayur11code&style=flat-square&label=VIEWS&color=c5c7ca&labelColor=1a1d21&background=08090b" -o /tmp/badge.svg
 
           if [ -s /tmp/badge.svg ] && head -c 100 /tmp/badge.svg | grep -q '<svg'; then
             rsvg-convert -w 100 -h 20 /tmp/badge.svg -o /tmp/badge.png

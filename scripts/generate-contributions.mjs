@@ -186,8 +186,9 @@ function renderHistogram(weeks) {
   const maxBarHeight = barAreaHeight - 4;
   const paddingX = 2;
   const paddingY = 2;
+  const yAxisWidth = 28;
 
-  const svgWidth = weeks.length * (barWidth + barGap) + paddingX * 2;
+  const svgWidth = weeks.length * (barWidth + barGap) + paddingX * 2 + yAxisWidth;
 
   // Aggregate by week
   const weeklyCounts = weeks.map((w) =>
@@ -237,14 +238,28 @@ function renderHistogram(weeks) {
   // Thin baseline
   const baseline = `  <line x1="0" y1="${paddingY + maxBarHeight}" x2="${svgWidth}" y2="${paddingY + maxBarHeight}" stroke="#25282d" stroke-width="0.5" opacity="0.6"/>`;
 
+  // Y-axis scale on the right side
+  const yAxisX = svgWidth - yAxisWidth + 8;
+  const tickCount = Math.min(maxCount, 5);
+  const yTicks = [];
+  for (let i = 0; i <= tickCount; i++) {
+    const val = Math.round((i / tickCount) * maxCount);
+    const y = paddingY + maxBarHeight - (i / tickCount) * maxBarHeight;
+    yTicks.push(`  <text x="${yAxisX}" y="${y + 2}" font-family="'Courier New', 'Lucida Console', monospace" font-size="6" fill="#4a4d52" text-anchor="start">${val}</text>`);
+    if (i > 0 && i < tickCount) {
+      yTicks.push(`  <line x1="${paddingX}" y1="${y}" x2="${svgWidth - yAxisWidth}" y2="${y}" stroke="#1a1d21" stroke-width="0.3" opacity="0.5"/>`);
+    }
+  }
+
   // Quiet title
-  const title = `  <text x="${svgWidth / 2}" y="-5" font-family="'Courier New', 'Lucida Console', monospace" font-size="6.5" fill="#686b70" text-anchor="middle" letter-spacing="2">C O N T R I B U T I O N S</text>`;
+  const title = `  <text x="${(svgWidth - yAxisWidth) / 2}" y="-5" font-family="'Courier New', 'Lucida Console', monospace" font-size="6.5" fill="#686b70" text-anchor="middle" letter-spacing="2">C O N T R I B U T I O N S</text>`;
 
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -12 ${svgWidth} ${svgHeight + 12}" width="100%" preserveAspectRatio="none">
 ${title}
 ${baseline}
 ${bars}
 ${labels}
+${yTicks.join("\n")}
 </svg>`;
 
   return svg;

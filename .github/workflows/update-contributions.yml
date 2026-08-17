@@ -36,6 +36,7 @@ jobs:
         run: |
           ts=$(date +%s)
           sed -i "s|api/vinyl[^\"']*\([\"']\)|api/vinyl?v=$ts\1|g" README.md
+          sed -i "s|contributions\.png[^\"']*\([\"']\)|contributions.png?v=$ts\1|g" README.md
 
       - name: Commit and push
         run: |

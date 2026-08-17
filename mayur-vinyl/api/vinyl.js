@@ -119,8 +119,8 @@ function renderVinyl(count) {
     <circle cx="200" cy="200" r="55" fill="#08090b"/>
     <circle cx="200" cy="200" r="54.5" fill="none" stroke="#505358" stroke-width="0.35" opacity="0.35"/>
     <circle cx="200" cy="200" r="43" fill="none" stroke="#3b3e43" stroke-width="0.3" opacity="0.25"/>
-    <text x="200" y="195" font-family="'Courier New','Lucida Console',monospace" font-size="22" font-weight="bold" fill="#c5c7ca" text-anchor="middle">${escapeXml(count)}</text>
-    <text x="200" y="214" font-family="'Courier New','Lucida Console',monospace" font-size="8" fill="#686b70" text-anchor="middle" letter-spacing="2">VIEWS</text>
+    <text x="200" y="196" font-family="'Georgia','Palatino Linotype','Book Antiqua','Palatino',serif" font-size="24" font-weight="normal" fill="#7a7d82" text-anchor="middle">${escapeXml(count)}</text>
+    <text x="200" y="214" font-family="'Georgia','Palatino Linotype','Book Antiqua','Palatino',serif" font-size="7" font-weight="normal" fill="#505358" text-anchor="middle" letter-spacing="3">VIEWS</text>
   </g>
 
   <g>

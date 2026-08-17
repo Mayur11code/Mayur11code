@@ -58,6 +58,8 @@ jobs:
             echo "No changes to commit."
           else
             git commit -m "chore: update contribution histogram and visitor counter"
-            git pull --rebase origin main
+            for i in 1 2 3; do
+              git pull --rebase origin main && break || true
+            done
             git push
           fi

@@ -30,7 +30,6 @@ jobs:
         run: |
           ts=$(date +%s)
           sed -i "s|api/vinyl[^\"']*\([\"']\)|api/vinyl?v=$ts\1|g" README.md
-          sed -i "s|contributions\.svg[^\"']*\([\"']\)|contributions.svg?v=$ts\1|g" README.md
 
       - name: Commit and push
         run: |
@@ -41,5 +40,6 @@ jobs:
             echo "No changes to commit."
           else
             git commit -m "chore: update contributions + bust image cache"
+            git pull --rebase origin main
             git push --force-with-lease origin main
           fi

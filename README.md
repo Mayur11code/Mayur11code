@@ -25,6 +25,6 @@ Delhi, India · building quietly.
 </tr>
 </table>
 
-<img src="assets/contributions.svg?v=1" width="100%" alt="contribution activity">
+<img src="assets/contributions.svg" width="100%" alt="contribution activity">
 
 </div>

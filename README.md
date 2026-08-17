@@ -25,6 +25,6 @@ Delhi, India · building quietly.
 </tr>
 </table>
 
-<img src="assets/contributions.png" width="100%" alt="contribution activity">
+<img src="https://raw.githubusercontent.com/Mayur11code/Mayur11code/main/assets/contributions.png" width="100%" alt="contribution activity">
 
 </div>

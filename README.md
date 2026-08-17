@@ -19,12 +19,12 @@ Delhi, India · building quietly.
 </td>
 <td width="45%" align="center" valign="middle">
 
-<img src="https://mayur11code.vercel.app/api/vinyl?v=1786976209" width="280" alt="rotating vinyl record with profile view count" />
+<img src="https://mayur11code.vercel.app/api/vinyl?v=1786976617" width="280" alt="rotating vinyl record with profile view count" />
 
 </td>
 </tr>
 </table>
 
-<img src="https://raw.githubusercontent.com/Mayur11code/Mayur11code/main/assets/contributions.png" width="100%" alt="contribution activity">
+<img src="https://raw.githubusercontent.com/Mayur11code/Mayur11code/main/assets/contributions.png?v=1786976617" width="100%" alt="contribution activity">
 
 </div>

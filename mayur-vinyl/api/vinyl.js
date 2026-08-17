@@ -1,10 +1,4 @@
-let cache = { count: null, ts: 0 };
-const CACHE_MS = 30 * 1000;
-
 async function fetchCount() {
-  const now = Date.now();
-  if (cache.count !== null && now - cache.ts < CACHE_MS) return cache.count;
-
   try {
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), 5000);
@@ -17,14 +11,15 @@ async function fetchCount() {
     const svg = await res.text();
     const m = svg.match(/<text[^>]*>([\d,]+)<\/text>/);
     const count = m ? m[1].replace(/,/g, "") : null;
-    if (count) {
-      cache = { count, ts: now };
-      return count;
-    }
+    console.log(`COUNTER_SOURCE=komarev`);
+    console.log(`COUNTER_VALUE=${count || "\u2014"}`);
+    return count;
   } catch (e) {
-    console.error("Komarev fetch failed:", e.message);
+    console.error(`Komarev fetch failed: ${e.message}`);
+    console.log(`COUNTER_SOURCE=komarev`);
+    console.log(`COUNTER_VALUE=error`);
+    return "\u2014";
   }
-  return cache.count || "\u2014";
 }
 
 function escapeXml(s) {
@@ -164,7 +159,8 @@ export default async function handler(req, res) {
   const svg = renderVinyl(count);
 
   res.setHeader("Content-Type", "image/svg+xml");
-  res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+  res.setHeader("Cache-Control", "no-store, no-cache, max-age=0, must-revalidate");
+  res.setHeader("CDN-Cache-Control", "no-store");
   res.setHeader("Pragma", "no-cache");
   res.setHeader("Expires", "0");
   res.status(200).send(svg);

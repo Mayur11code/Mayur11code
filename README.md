@@ -29,7 +29,7 @@ Delhi, India · building quietly.
 </td>
 <td width="45%" align="center" valign="middle">
 
-<img src="assets/vinyl.svg" width="280" alt="vinyl record">
+<img src="assets/vinyl.png" width="280" alt="vinyl record">
 
 </td>
 </tr>

@@ -6,10 +6,13 @@ async function fetchCount() {
   if (cache.count !== null && now - cache.ts < CACHE_MS) return cache.count;
 
   try {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 5000);
     const res = await fetch(
       "https://komarev.com/ghpvc/?username=Mayur11code&format=svg",
-      { signal: AbortSignal.timeout(5000) }
+      { signal: controller.signal }
     );
+    clearTimeout(timer);
     if (!res.ok) throw new Error(`Komarev ${res.status}`);
     const svg = await res.text();
     const m = svg.match(/<text[^>]*>([\d,]+)<\/text>/);
@@ -25,7 +28,7 @@ async function fetchCount() {
 }
 
 function escapeXml(s) {
-  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }
 
 function renderVinyl(count) {
@@ -156,7 +159,7 @@ function renderVinyl(count) {
 </svg>`;
 }
 
-module.exports = async function handler(req, res) {
+export default async function handler(req, res) {
   const count = await fetchCount();
   const svg = renderVinyl(count);
 
@@ -164,4 +167,4 @@ module.exports = async function handler(req, res) {
   res.setHeader("Cache-Control", "public, s-maxage=300, stale-while-revalidate=600");
   res.setHeader("X-Counter-Source", "komarev");
   res.status(200).send(svg);
-};
+}

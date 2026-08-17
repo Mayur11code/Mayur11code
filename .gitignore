@@ -1,0 +1,10 @@
+node_modules/
+.opencode/
+.cursor/
+.copilot/
+.aider*
+.clinerules
+.cline/
+.windsurfrules
+.roomodes
+AGENTS.md

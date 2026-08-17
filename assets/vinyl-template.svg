@@ -10,11 +10,6 @@
       <stop offset="50%" stop-color="#ffffff" stop-opacity="0.015"/>
       <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
     </radialGradient>
-    <!-- Mask to cut transparent center hole for badge -->
-    <mask id="center-mask">
-      <rect width="400" height="400" fill="white"/>
-      <circle cx="200" cy="200" r="30" fill="black"/>
-    </mask>
   </defs>
 
   <!-- === BODY === -->
@@ -25,8 +20,8 @@
   <circle cx="200" cy="200" r="193" fill="none" stroke="#292c30" stroke-width="1.2" opacity="0.5"/>
   <circle cx="200" cy="200" r="191" fill="none" stroke="#1a1d21" stroke-width="0.6" opacity="0.6"/>
 
-  <!-- === GROOVE FIELD (masked to preserve transparent center) === -->
-  <g mask="url(#center-mask)">
+  <!-- === GROOVE FIELD === -->
+  <g>
     <!-- Base fill -->
     <circle cx="200" cy="200" r="189" fill="#0e1013"/>
 
@@ -56,7 +51,7 @@
     <circle cx="200" cy="200" r="100" fill="none" stroke="#292c30" stroke-width="0.5" opacity="0.5"/>
     <circle cx="200" cy="200" r="96" fill="none" stroke="#292c30" stroke-width="0.4" opacity="0.35"/>
 
-    <!-- Zone 3: Inner (r=92 to r=60) — dense approaching label -->
+    <!-- Zone 3: Inner (r=92 to r=62) — dense approaching label -->
     <circle cx="200" cy="200" r="92" fill="none" stroke="#292c30" stroke-width="0.5" opacity="0.5"/>
     <circle cx="200" cy="200" r="88" fill="none" stroke="#45484c" stroke-width="0.35" opacity="0.2"/>
     <circle cx="200" cy="200" r="84" fill="none" stroke="#292c30" stroke-width="0.5" opacity="0.45"/>
@@ -83,13 +78,12 @@
     <circle cx="200" cy="200" r="58" fill="#0e1013"/>
     <circle cx="200" cy="200" r="57" fill="none" stroke="#292c30" stroke-width="0.4" opacity="0.5"/>
 
-    <!-- Center label base (matches page background so badge blends) -->
+    <!-- Center label -->
     <circle cx="200" cy="200" r="55" fill="#08090b"/>
     <circle cx="200" cy="200" r="54.5" fill="none" stroke="#292c30" stroke-width="0.3" opacity="0.3"/>
+    <circle cx="200" cy="200" r="42" fill="none" stroke="#292c30" stroke-width="0.25" opacity="0.2"/>
+    <line x1="172" y1="200" x2="228" y2="200" stroke="#292c30" stroke-width="0.3" opacity="0.15"/>
   </g>
-
-  <!-- Spindle hole (tiny dot behind badge) -->
-  <circle cx="200" cy="200" r="2.5" fill="#08090b" opacity="0.8"/>
 
   <!-- === LIGHT REFLECTION === -->
   <circle cx="200" cy="200" r="193" fill="url(#refl)"/>

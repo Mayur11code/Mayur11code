@@ -26,37 +26,24 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: node scripts/generate-contributions.mjs
 
-      - name: Render vinyl with visitor counter
+      - name: Render vinyl record
         run: |
-          sudo apt-get update -qq && sudo apt-get install -y -qq librsvg2-bin imagemagick > /dev/null 2>&1
-
-          rsvg-convert -w 800 -h 800 assets/vinyl-template.svg -o /tmp/vinyl_base.png
-
-          curl -sL "https://komarev.com/ghpvc/?username=Mayur11code&style=flat-square&color=c5c7ca&background=08090b" -o /tmp/badge.svg
-
-          if [ -s /tmp/badge.svg ] && head -c 100 /tmp/badge.svg | grep -q '<svg'; then
-            rsvg-convert -w 120 -h 24 /tmp/badge.svg -o /tmp/badge.png
-            convert /tmp/vinyl_base.png \
-              /tmp/badge.png \
-              -gravity center -geometry +0+0 \
-              -composite assets/vinyl.png
-            echo "Badge composited onto vinyl ($(wc -c < assets/vinyl.png) bytes)"
-          else
-            cp /tmp/vinyl_base.png assets/vinyl.png
-            echo "Badge fetch failed, using plain vinyl"
-          fi
+          sudo apt-get update -qq && sudo apt-get install -y -qq librsvg2-bin > /dev/null 2>&1
+          rsvg-convert -w 800 -h 800 assets/vinyl-template.svg -o assets/vinyl.png
+          echo "Vinyl rendered ($(wc -c < assets/vinyl.png) bytes)"
 
       - name: Commit and push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          if [ -f assets/vinyl.png ]; then
-            sed -i 's|src="assets/vinyl.svg"|src="assets/vinyl.png"|' README.md
-          fi
-          git add assets/contributions.svg assets/vinyl.png assets/vinyl-template.svg README.md
+          git add assets/contributions.svg assets/vinyl.png
           if git diff --staged --quiet; then
             echo "No changes to commit."
           else
-            git commit -m "chore: update contribution histogram and visitor counter"
+            git commit -m "chore: update contribution histogram and vinyl"
+            # Force-with-lease is safe here because this workflow only
+            # commits auto-generated assets. The user's source code is
+            # never overwritten. This prevents stale merge conflicts on
+            # the binary vinyl.png when the user pushes between runs.
             git push --force-with-lease origin main
           fi

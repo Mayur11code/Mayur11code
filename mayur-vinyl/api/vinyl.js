@@ -164,7 +164,8 @@ export default async function handler(req, res) {
   const svg = renderVinyl(count);
 
   res.setHeader("Content-Type", "image/svg+xml");
-  res.setHeader("Cache-Control", "no-store");
-  res.setHeader("X-Counter-Source", "komarev");
+  res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+  res.setHeader("Pragma", "no-cache");
+  res.setHeader("Expires", "0");
   res.status(200).send(svg);
 }

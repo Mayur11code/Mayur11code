@@ -1,5 +1,5 @@
 let cache = { count: null, ts: 0 };
-const CACHE_MS = 10 * 60 * 1000;
+const CACHE_MS = 30 * 1000;
 
 async function fetchCount() {
   const now = Date.now();
@@ -164,7 +164,7 @@ export default async function handler(req, res) {
   const svg = renderVinyl(count);
 
   res.setHeader("Content-Type", "image/svg+xml");
-  res.setHeader("Cache-Control", "public, s-maxage=300, stale-while-revalidate=600");
+  res.setHeader("Cache-Control", "no-store");
   res.setHeader("X-Counter-Source", "komarev");
   res.status(200).send(svg);
 }

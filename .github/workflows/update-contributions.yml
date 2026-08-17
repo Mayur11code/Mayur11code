@@ -32,10 +32,10 @@ jobs:
 
           rsvg-convert -w 800 -h 800 assets/vinyl-template.svg -o /tmp/vinyl_base.png
 
-          curl -sL "https://komarev.com/ghpvc/?username=Mayur11code&style=flat-square&label=VIEWS&color=c5c7ca&labelColor=1a1d21&background=08090b" -o /tmp/badge.svg
+          curl -sL "https://komarev.com/ghpvc/?username=Mayur11code&style=flat-square&color=c5c7ca&background=08090b" -o /tmp/badge.svg
 
           if [ -s /tmp/badge.svg ] && head -c 100 /tmp/badge.svg | grep -q '<svg'; then
-            rsvg-convert -w 100 -h 20 /tmp/badge.svg -o /tmp/badge.png
+            rsvg-convert -w 120 -h 24 /tmp/badge.svg -o /tmp/badge.png
             convert /tmp/vinyl_base.png \
               /tmp/badge.png \
               -gravity center -geometry +0+0 \
@@ -58,8 +58,5 @@ jobs:
             echo "No changes to commit."
           else
             git commit -m "chore: update contribution histogram and visitor counter"
-            for i in 1 2 3; do
-              git pull --rebase origin main && break || true
-            done
-            git push
+            git push --force-with-lease origin main
           fi

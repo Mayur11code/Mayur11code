@@ -239,15 +239,15 @@ function renderHistogram(weeks) {
   const baseline = `  <line x1="0" y1="${paddingY + maxBarHeight}" x2="${svgWidth}" y2="${paddingY + maxBarHeight}" stroke="#25282d" stroke-width="0.5" opacity="0.6"/>`;
 
   // Y-axis scale on the right side
-  const yAxisX = svgWidth - yAxisWidth + 8;
+  const yAxisX = svgWidth - yAxisWidth + 10;
   const tickCount = Math.min(maxCount, 5);
   const yTicks = [];
   for (let i = 0; i <= tickCount; i++) {
     const val = Math.round((i / tickCount) * maxCount);
     const y = paddingY + maxBarHeight - (i / tickCount) * maxBarHeight;
-    yTicks.push(`  <text x="${yAxisX}" y="${y + 2}" font-family="'Courier New', 'Lucida Console', monospace" font-size="6" fill="#4a4d52" text-anchor="start">${val}</text>`);
+    yTicks.push(`  <text x="${yAxisX}" y="${y + 2}" font-family="'Courier New', 'Lucida Console', monospace" font-size="6.5" fill="#686b70" text-anchor="start">${val}</text>`);
     if (i > 0 && i < tickCount) {
-      yTicks.push(`  <line x1="${paddingX}" y1="${y}" x2="${svgWidth - yAxisWidth}" y2="${y}" stroke="#1a1d21" stroke-width="0.3" opacity="0.5"/>`);
+      yTicks.push(`  <line x1="${paddingX}" y1="${y}" x2="${svgWidth - yAxisWidth + 2}" y2="${y}" stroke="#25282d" stroke-width="0.4" opacity="0.6"/>`);
     }
   }
 

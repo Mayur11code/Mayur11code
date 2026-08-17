@@ -1,6 +1,6 @@
 <div align="center">
 
-# <sub>M A Y U R</sub> <sup>N A N D A</sup>
+# M A Y U R &nbsp; N A N D A
 
 <br>
 

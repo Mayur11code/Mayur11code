@@ -26,36 +26,34 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: node scripts/generate-contributions.mjs
 
-      - name: Embed live visitor counter in vinyl
+      - name: Render vinyl with visitor counter
         run: |
-          # Always start from template (has the KOMAREV_BADGE placeholder)
-          cp assets/vinyl-template.svg assets/vinyl.svg
+          sudo apt-get update -qq && sudo apt-get install -y -qq librsvg2-bin imagemagick > /dev/null 2>&1
 
-          curl -sL "https://komarev.com/ghpvc/?username=Mayur11code&style=flat&label=&color=96999d&labelColor=08090b&background=08090b" -o /tmp/badge.png
-          if [ -s /tmp/badge.png ]; then
-            BADGE_B64=$(base64 -w0 /tmp/badge.png)
-            node -e "
-              const fs = require('fs');
-              const svg = fs.readFileSync('assets/vinyl.svg', 'utf8');
-              const b64 = process.argv[1];
-              const tag = '<image x=\"172\" y=\"188\" width=\"56\" height=\"24\" href=\"data:image/png;base64,' + b64 + '\" />';
-              fs.writeFileSync('assets/vinyl.svg', svg.replace('<!--KOMAREV_BADGE-->', tag));
-              console.log('Visitor counter embedded (' + b64.length + ' chars base64)');
-            " "$BADGE_B64"
+          rsvg-convert -w 800 -h 800 assets/vinyl-template.svg -o /tmp/vinyl_base.png
+
+          curl -sL "https://komarev.com/ghpvc/?username=Mayur11code&style=flat&label=&color=96999d&labelColor=08090b&background=08090b" -o /tmp/badge.svg
+
+          if [ -s /tmp/badge.svg ] && head -c 100 /tmp/badge.svg | grep -q '<svg'; then
+            rsvg-convert -w 120 -h 52 /tmp/badge.svg -o /tmp/badge.png
+            convert /tmp/vinyl_base.png \
+              /tmp/badge.png \
+              -gravity center -geometry +0+0 \
+              -composite assets/vinyl.png
+            echo "Badge composited onto vinyl ($(wc -c < assets/vinyl.png) bytes)"
           else
-            echo "Warning: Failed to fetch badge, removing placeholder"
-            node -e "
-              const fs = require('fs');
-              const svg = fs.readFileSync('assets/vinyl.svg', 'utf8');
-              fs.writeFileSync('assets/vinyl.svg', svg.replace('<!--KOMAREV_BADGE-->', ''));
-            "
+            cp /tmp/vinyl_base.png assets/vinyl.png
+            echo "Badge fetch failed, using plain vinyl"
           fi
 
       - name: Commit and push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add assets/contributions.svg assets/vinyl.svg
+          if [ -f assets/vinyl.png ]; then
+            sed -i 's|src="assets/vinyl.svg"|src="assets/vinyl.png"|' README.md
+          fi
+          git add assets/contributions.svg assets/vinyl.png README.md
           if git diff --staged --quiet; then
             echo "No changes to commit."
           else

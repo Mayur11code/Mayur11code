@@ -19,9 +19,8 @@ Delhi, India · building quietly.
 </td>
 <td width="45%" align="center" valign="middle">
 
-<img src="assets/vinyl.png" width="260" alt="vinyl record">
-<br>
-<img src="https://komarev.com/ghpvc/?username=Mayur11code&style=flat-square&color=c5c7ca&background=08090b" width="110" alt="profile views">
+<!-- POC: testing animated SVG on GitHub -->
+<img src="assets/animated-vinyl-poc.svg" width="260" alt="animated vinyl record with profile view count">
 
 </td>
 </tr>

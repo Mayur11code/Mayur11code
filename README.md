@@ -31,6 +31,10 @@ Delhi, India · building quietly.
 
 <img src="assets/vinyl.png" width="280" alt="vinyl record">
 
+<br>
+
+<img src="https://komarev.com/ghpvc/?username=Mayur11code&style=flat&label=&color=96999d&labelColor=08090b&background=08090b" width="56" alt="profile views">
+
 </td>
 </tr>
 </table>

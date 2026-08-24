@@ -14,7 +14,7 @@ currently exploring distributed systems,<br>AI, and developer tools.
 
 forge · funcundo · rammy · custos
 
-Delhi, India · building quietly
+Delhi, India · building quietly.
 
 </td>
 <td width="45%" align="center" valign="middle">

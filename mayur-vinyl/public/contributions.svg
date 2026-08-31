@@ -1,16 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 302 108" width="100%">
   <text x="136" y="10" font-family="'Courier New','Lucida Console',monospace" font-size="6" fill="#686b70" text-anchor="middle" letter-spacing="2">C O N T R I B U T I O N S</text>
   <line x1="0" y1="90" x2="272" y2="90" stroke="#25282d" stroke-width="0.5" opacity="0.6"/>
-  <rect x="2" y="89.00" width="3" height="1.00" fill="#3b3e43" opacity="0.30" rx="0.5"/>
-  <rect x="7" y="88.85" width="3" height="1.15" fill="#3d4045" opacity="0.51" rx="0.5"/>
-  <rect x="12" y="87.98" width="3" height="2.02" fill="#3f4247" opacity="0.51" rx="0.5"/>
-  <rect x="17" y="86.26" width="3" height="3.74" fill="#42454a" opacity="0.53" rx="0.5"/>
-  <rect x="22" y="75.60" width="3" height="14.40" fill="#57595e" opacity="0.60" rx="0.5"/>
-  <rect x="27" y="89.00" width="3" height="1.00" fill="#3b3e43" opacity="0.30" rx="0.5"/>
-  <rect x="32" y="83.95" width="3" height="6.05" fill="#474a4e" opacity="0.54" rx="0.5"/>
-  <rect x="37" y="75.89" width="3" height="14.11" fill="#56595d" opacity="0.60" rx="0.5"/>
-  <rect x="42" y="83.95" width="3" height="6.05" fill="#474a4e" opacity="0.54" rx="0.5"/>
-  <rect x="47" y="85.10" width="3" height="4.90" fill="#44474c" opacity="0.53" rx="0.5"/>
+  <rect x="2" y="88.85" width="3" height="1.15" fill="#3d4045" opacity="0.51" rx="0.5"/>
+  <rect x="7" y="87.98" width="3" height="2.02" fill="#3f4247" opacity="0.51" rx="0.5"/>
+  <rect x="12" y="86.26" width="3" height="3.74" fill="#42454a" opacity="0.53" rx="0.5"/>
+  <rect x="17" y="75.60" width="3" height="14.40" fill="#57595e" opacity="0.60" rx="0.5"/>
+  <rect x="22" y="89.00" width="3" height="1.00" fill="#3b3e43" opacity="0.30" rx="0.5"/>
+  <rect x="27" y="83.95" width="3" height="6.05" fill="#474a4e" opacity="0.54" rx="0.5"/>
+  <rect x="32" y="75.89" width="3" height="14.11" fill="#56595d" opacity="0.60" rx="0.5"/>
+  <rect x="37" y="83.95" width="3" height="6.05" fill="#474a4e" opacity="0.54" rx="0.5"/>
+  <rect x="42" y="85.10" width="3" height="4.90" fill="#44474c" opacity="0.53" rx="0.5"/>
+  <rect x="47" y="89.00" width="3" height="1.00" fill="#3b3e43" opacity="0.30" rx="0.5"/>
   <rect x="52" y="89.00" width="3" height="1.00" fill="#3b3e43" opacity="0.30" rx="0.5"/>
   <rect x="57" y="89.00" width="3" height="1.00" fill="#3b3e43" opacity="0.30" rx="0.5"/>
   <rect x="62" y="89.00" width="3" height="1.00" fill="#3b3e43" opacity="0.30" rx="0.5"/>
@@ -19,15 +19,15 @@
   <rect x="77" y="89.00" width="3" height="1.00" fill="#3b3e43" opacity="0.30" rx="0.5"/>
   <rect x="82" y="89.00" width="3" height="1.00" fill="#3b3e43" opacity="0.30" rx="0.5"/>
   <rect x="87" y="89.00" width="3" height="1.00" fill="#3b3e43" opacity="0.30" rx="0.5"/>
-  <rect x="92" y="89.00" width="3" height="1.00" fill="#3b3e43" opacity="0.30" rx="0.5"/>
-  <rect x="97" y="81.36" width="3" height="8.64" fill="#4c4e53" opacity="0.56" rx="0.5"/>
-  <rect x="102" y="71.28" width="3" height="18.72" fill="#5f6266" opacity="0.63" rx="0.5"/>
-  <rect x="107" y="77.62" width="3" height="12.38" fill="#53565a" opacity="0.59" rx="0.5"/>
-  <rect x="112" y="78.19" width="3" height="11.81" fill="#525459" opacity="0.58" rx="0.5"/>
-  <rect x="117" y="68.69" width="3" height="21.31" fill="#64676b" opacity="0.65" rx="0.5"/>
-  <rect x="122" y="80.50" width="3" height="9.50" fill="#4d5055" opacity="0.57" rx="0.5"/>
-  <rect x="127" y="79.06" width="3" height="10.94" fill="#505358" opacity="0.58" rx="0.5"/>
-  <rect x="132" y="85.97" width="3" height="4.03" fill="#43464b" opacity="0.53" rx="0.5"/>
+  <rect x="92" y="81.36" width="3" height="8.64" fill="#4c4e53" opacity="0.56" rx="0.5"/>
+  <rect x="97" y="71.28" width="3" height="18.72" fill="#5f6266" opacity="0.63" rx="0.5"/>
+  <rect x="102" y="77.62" width="3" height="12.38" fill="#53565a" opacity="0.59" rx="0.5"/>
+  <rect x="107" y="78.19" width="3" height="11.81" fill="#525459" opacity="0.58" rx="0.5"/>
+  <rect x="112" y="68.69" width="3" height="21.31" fill="#64676b" opacity="0.65" rx="0.5"/>
+  <rect x="117" y="80.50" width="3" height="9.50" fill="#4d5055" opacity="0.57" rx="0.5"/>
+  <rect x="122" y="79.06" width="3" height="10.94" fill="#505358" opacity="0.58" rx="0.5"/>
+  <rect x="127" y="85.97" width="3" height="4.03" fill="#43464b" opacity="0.53" rx="0.5"/>
+  <rect x="132" y="89.00" width="3" height="1.00" fill="#3c3f44" opacity="0.50" rx="0.5"/>
   <rect x="137" y="89.00" width="3" height="1.00" fill="#3c3f44" opacity="0.50" rx="0.5"/>
   <rect x="142" y="87.70" width="3" height="2.30" fill="#3f4247" opacity="0.52" rx="0.5"/>
   <rect x="147" y="70.99" width="3" height="19.01" fill="#5f6267" opacity="0.63" rx="0.5"/>
@@ -54,11 +54,11 @@
   <rect x="252" y="46.80" width="3" height="43.20" fill="#8e9094" opacity="0.80" rx="0.5"/>
   <rect x="257" y="60.62" width="3" height="29.38" fill="#73767a" opacity="0.70" rx="0.5"/>
   <rect x="262" y="45.65" width="3" height="44.35" fill="#909296" opacity="0.81" rx="0.5"/>
-  <rect x="267" y="85.10" width="3" height="4.90" fill="#44474c" opacity="0.53" rx="0.5"/>
+  <rect x="267" y="79.92" width="3" height="10.08" fill="#4e5156" opacity="0.57" rx="0.5"/>
   <text x="3.5" y="107" font-family="'Courier New','Lucida Console',monospace" font-size="6" fill="#686b70" text-anchor="middle">AUG</text>
   <text x="33.5" y="107" font-family="'Courier New','Lucida Console',monospace" font-size="6" fill="#686b70" text-anchor="middle">OCT</text>
   <text x="63.5" y="107" font-family="'Courier New','Lucida Console',monospace" font-size="6" fill="#686b70" text-anchor="middle">NOV</text>
-  <text x="93.5" y="107" font-family="'Courier New','Lucida Console',monospace" font-size="6" fill="#686b70" text-anchor="middle">DEC</text>
+  <text x="93.5" y="107" font-family="'Courier New','Lucida Console',monospace" font-size="6" fill="#686b70" text-anchor="middle">JAN</text>
   <text x="123.5" y="107" font-family="'Courier New','Lucida Console',monospace" font-size="6" fill="#686b70" text-anchor="middle">FEB</text>
   <text x="153.5" y="107" font-family="'Courier New','Lucida Console',monospace" font-size="6" fill="#686b70" text-anchor="middle">MAR</text>
   <text x="183.5" y="107" font-family="'Courier New','Lucida Console',monospace" font-size="6" fill="#686b70" text-anchor="middle">MAY</text>

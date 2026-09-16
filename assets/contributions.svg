@@ -27,8 +27,8 @@
   <rect x="117" y="85.97" width="3" height="4.03" fill="#43464b" opacity="0.53" rx="0.5"/>
   <rect x="122" y="89.00" width="3" height="1.00" fill="#3c3f44" opacity="0.50" rx="0.5"/>
   <rect x="127" y="87.70" width="3" height="2.30" fill="#3f4247" opacity="0.52" rx="0.5"/>
-  <rect x="132" y="84.24" width="3" height="5.76" fill="#46494e" opacity="0.54" rx="0.5"/>
-  <rect x="137" y="76.75" width="3" height="13.25" fill="#54575c" opacity="0.59" rx="0.5"/>
+  <rect x="132" y="81.36" width="3" height="8.64" fill="#4c4e53" opacity="0.56" rx="0.5"/>
+  <rect x="137" y="79.63" width="3" height="10.37" fill="#4f5256" opacity="0.57" rx="0.5"/>
   <rect x="142" y="76.46" width="3" height="13.54" fill="#55585c" opacity="0.59" rx="0.5"/>
   <rect x="147" y="67.54" width="3" height="22.46" fill="#66696d" opacity="0.66" rx="0.5"/>
   <rect x="152" y="65.23" width="3" height="24.77" fill="#6a6d71" opacity="0.67" rx="0.5"/>
@@ -54,7 +54,7 @@
   <rect x="252" y="20.02" width="3" height="69.98" fill="#c1c3c6" opacity="0.99" rx="0.5"/>
   <rect x="257" y="22.32" width="3" height="67.68" fill="#bdbfc2" opacity="0.97" rx="0.5"/>
   <rect x="262" y="35.28" width="3" height="54.72" fill="#a4a6aa" opacity="0.88" rx="0.5"/>
-  <rect x="267" y="61.78" width="3" height="28.22" fill="#717478" opacity="0.70" rx="0.5"/>
+  <rect x="267" y="58.90" width="3" height="31.10" fill="#77797d" opacity="0.72" rx="0.5"/>
   <text x="3.5" y="107" font-family="'Courier New','Lucida Console',monospace" font-size="6" fill="#686b70" text-anchor="middle">SEP</text>
   <text x="33.5" y="107" font-family="'Courier New','Lucida Console',monospace" font-size="6" fill="#686b70" text-anchor="middle">OCT</text>
   <text x="63.5" y="107" font-family="'Courier New','Lucida Console',monospace" font-size="6" fill="#686b70" text-anchor="middle">DEC</text>

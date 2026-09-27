@@ -19,7 +19,7 @@ Delhi, India · building quietly.
 </td>
 <td width="45%" align="center" valign="middle">
 
-<img src="https://mayur11code.vercel.app/api/vinyl?v=1790526821" width="280" alt="rotating vinyl record with profile view count" />
+<img src="https://mayur11code.vercel.app/api/vinyl?v=1790542858" width="280" alt="rotating vinyl record with profile view count" />
 
 </td>
 </tr>

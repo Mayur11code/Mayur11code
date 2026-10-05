@@ -186,11 +186,27 @@ async function fetchRollingContributions() {
     console.log(`  Fallback: ${cal.totalContributions} contributions`);
   }
 
-  // Clip all contribution days to today
+  // GitHub's calendar returns whole weeks starting on the Sunday on-or-before
+  // `from`. Both windows therefore begin/end on the same week, so the
+  // boundary week arrives twice and shifts every later month label. Merge
+  // weeks by firstDay, summing their days, and keep the series sorted.
+  const byFirstDay = new Map();
   for (const week of allWeeks) {
+    const days = week.contributionDays.slice();
+    const existing = byFirstDay.get(week.firstDay);
+    if (existing) existing.contributionDays.push(...days);
+    else byFirstDay.set(week.firstDay, { firstDay: week.firstDay, contributionDays: days });
+  }
+
+  const merged = [...byFirstDay.values()].sort((a, b) =>
+    a.firstDay < b.firstDay ? -1 : a.firstDay > b.firstDay ? 1 : 0
+  );
+
+  // Clip all contribution days to today
+  for (const week of merged) {
     week.contributionDays = week.contributionDays.filter((day) => day.date <= cutoff);
   }
-  const filteredWeeks = allWeeks.filter((w) => w.contributionDays.length > 0);
+  const filteredWeeks = merged.filter((w) => w.contributionDays.length > 0);
 
   console.log(`Total: ${totalContributions} contributions across ${filteredWeeks.length} weeks`);
 
@@ -228,23 +244,29 @@ function validateData(weeks) {
 const MONTHS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
 
 function renderHistogram(weeks) {
-  const barWidth = 3;
-  const barGap = 2;
+  // Geometry is authored at ~1:1 rendered pixel size (GitHub renders the
+  // README img at width="100%", ~800px). Authoring at 300px and scaling up
+  // made font-size 6 labels render ~16px — hence oversized/"too tall" labels.
+  const barWidth = 8;
+  const barGap = 6;
   const barPitch = barWidth + barGap;
-  const leftPadding = 2;
-  const rightPadding = 2;
-  const yAxisWidth = 30;
-  const labelHeight = 16;
-  const titleHeight = 14;
-  const topPadding = 4;
-  const bottomPadding = 2;
+  const leftPadding = 6;
+  const rightPadding = 6;
+  const yAxisWidth = 84;
+  const labelHeight = 34;
+  const titleHeight = 34;
+  const topPadding = 10;
+  const bottomPadding = 6;
 
   const chartWidth = weeks.length * barPitch - barGap + leftPadding + rightPadding;
   const svgWidth = chartWidth + yAxisWidth;
-  const maxBarHeight = 72;
+  const maxBarHeight = 196;
   const chartTop = titleHeight + topPadding;
   const chartBottom = chartTop + maxBarHeight;
   const svgHeight = chartBottom + labelHeight + bottomPadding;
+
+  const labelFontSize = 10;
+  const labelLetterSpacing = 1;
 
   // Aggregate by week
   const weeklyCounts = weeks.map((w) =>
@@ -259,22 +281,29 @@ function renderHistogram(weeks) {
   console.log(`  Max weekly count: ${maxCount}`);
   console.log(`  Axis max: ${axisMax}, ticks: [${ticks.join(", ")}]`);
 
-  // Determine month label positions
-  const monthLabels = [];
-  let lastMonth = -1;
+  // Determine month label positions.
+  // Labels are anchored to the CENTER of each month's week span. Anchoring to
+  // the first week made them appear offset/"drifting" relative to the bars.
+  const monthSpans = [];
   for (let i = 0; i < weeks.length; i++) {
     const firstDay = new Date(weeks[i].firstDay + "T00:00:00");
     const month = firstDay.getMonth();
-    if (month !== lastMonth) {
-      // Skip if too close to previous label (minimum 30px apart)
-      if (monthLabels.length > 0) {
-        const prevIdx = monthLabels[monthLabels.length - 1].index;
-        const gap = (i - prevIdx) * barPitch;
-        if (gap < 30) continue;
-      }
-      monthLabels.push({ month, index: i });
-      lastMonth = month;
+    const last = monthSpans[monthSpans.length - 1];
+    if (last && last.month === month) {
+      last.endIndex = i;
+    } else {
+      monthSpans.push({ month, startIndex: i, endIndex: i });
     }
+  }
+
+  // Drop spans too narrow to fit a label without colliding with its neighbour.
+  const minSpanPx = 34;
+  const monthLabels = [];
+  for (const span of monthSpans) {
+    const spanPx = (span.endIndex - span.startIndex + 1) * barPitch;
+    if (spanPx < minSpanPx) continue;
+    const centerIndex = (span.startIndex + span.endIndex) / 2;
+    monthLabels.push({ month: span.month, x: leftPadding + centerIndex * barPitch + barWidth / 2 });
   }
 
   // Build bars — heights use axisMax (same scale as Y-axis)
@@ -290,44 +319,47 @@ function renderHistogram(weeks) {
       const b = Math.round(0x43 + t * (0xca - 0x43));
       const hex = `#${r.toString(16).padStart(2, "0")}${g.toString(16).padStart(2, "0")}${b.toString(16).padStart(2, "0")}`;
       const opacity = count === 0 ? 0.3 : 0.5 + t * 0.5;
-      return `  <rect x="${x}" y="${y.toFixed(2)}" width="${barWidth}" height="${height.toFixed(2)}" fill="${hex}" opacity="${opacity.toFixed(2)}" rx="0.5"/>`;
+      return `  <rect x="${x}" y="${y.toFixed(2)}" width="${barWidth}" height="${height.toFixed(2)}" fill="${hex}" opacity="${opacity.toFixed(2)}" rx="1"/>`;
     })
     .join("\n");
 
-  // Month labels
+  // Month labels — sit just under the baseline, upright, evenly tracked
+  const labelBaselineY = chartBottom + labelFontSize + 12;
   const labels = monthLabels
-    .map(({ month, index }) => {
-      const x = leftPadding + index * barPitch + barWidth / 2;
-      return `  <text x="${x}" y="${svgHeight - 1}" font-family="'Courier New','Lucida Console',monospace" font-size="6" fill="#686b70" text-anchor="middle">${MONTHS[month]}</text>`;
-    })
+    .map(
+      ({ month, x }) =>
+        `  <text x="${x.toFixed(2)}" y="${labelBaselineY}" font-family="'Courier New','Lucida Console',monospace" font-size="${labelFontSize}" fill="#686b70" text-anchor="middle" letter-spacing="${labelLetterSpacing}">${MONTHS[month]}</text>`
+    )
     .join("\n");
 
   // Baseline
-  const baseline = `  <line x1="0" y1="${chartBottom}" x2="${chartWidth}" y2="${chartBottom}" stroke="#25282d" stroke-width="0.5" opacity="0.6"/>`;
+  const baseline = `  <line x1="0" y1="${chartBottom}" x2="${chartWidth}" y2="${chartBottom}" stroke="#25282d" stroke-width="1" opacity="0.6"/>`;
 
   // Y-axis ticks and gridlines — use the SAME ticks and axisMax
-  const yAxisX = chartWidth + 6;
+  const yAxisX = chartWidth + 14;
   const yTicks = ticks
     .map((tickVal, i) => {
       const y = chartBottom - (tickVal / axisMax) * maxBarHeight;
       const elements = [];
       // Gridline (skip bottom baseline and top)
       if (i > 0 && i < ticks.length) {
-        elements.push(`  <line x1="${leftPadding}" y1="${y.toFixed(2)}" x2="${chartWidth}" y2="${y.toFixed(2)}" stroke="#25282d" stroke-width="0.3" opacity="0.5"/>`);
+        elements.push(`  <line x1="${leftPadding}" y1="${y.toFixed(2)}" x2="${chartWidth}" y2="${y.toFixed(2)}" stroke="#25282d" stroke-width="0.6" opacity="0.5"/>`);
       }
       // Label
       const label = tickVal >= 1000 ? `${(tickVal / 1000).toFixed(tickVal % 1000 === 0 ? 0 : 1)}k` : String(tickVal);
-      elements.push(`  <text x="${yAxisX}" y="${(y + 2.5).toFixed(2)}" font-family="'Courier New','Lucida Console',monospace" font-size="6" fill="#686b70" text-anchor="start">${label}</text>`);
+      elements.push(`  <text x="${yAxisX}" y="${(y + labelFontSize * 0.35).toFixed(2)}" font-family="'Courier New','Lucida Console',monospace" font-size="${labelFontSize}" fill="#686b70" text-anchor="start">${label}</text>`);
       return elements.join("\n");
     })
     .join("\n");
 
   // Title
   const titleX = chartWidth / 2;
-  const titleY = titleHeight - 4;
-  const title = `  <text x="${titleX}" y="${titleY}" font-family="'Courier New','Lucida Console',monospace" font-size="6" fill="#686b70" text-anchor="middle" letter-spacing="2">C O N T R I B U T I O N S</text>`;
+  const titleY = 16;
+  const title = `  <text x="${titleX}" y="${titleY}" font-family="'Courier New','Lucida Console',monospace" font-size="11" fill="#686b70" text-anchor="middle" letter-spacing="3">C O N T R I B U T I O N S</text>`;
 
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${svgWidth} ${svgHeight}" width="100%">
+  // Explicit width/height in px so GitHub's width="100%" scales ~1:1 instead
+  // of blowing the artwork up 2.7x.
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${svgWidth} ${svgHeight}" width="${svgWidth}" height="${svgHeight}">
 ${title}
 ${baseline}
 ${bars}

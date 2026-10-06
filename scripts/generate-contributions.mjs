@@ -182,12 +182,90 @@ async function fetchProfile() {
   throw new Error("Failed to fetch profile after 3 attempts");
 }
 
+// ─── Top Repo (this week) ────────────────────────────────────────────────────
+
+const TOP_REPO_QUERY = `
+  query ($login: String!, $from: DateTime!, $to: DateTime!) {
+    user(login: $login) {
+      contributionsCollection(from: $from, to: $to) {
+        commitContributionsByRepository(maxRepositories: 10) {
+          repository { name }
+          contributions { totalCount }
+        }
+        pullRequestContributionsByRepository(maxRepositories: 10) {
+          repository { name }
+          contributions { totalCount }
+        }
+        issueContributionsByRepository(maxRepositories: 10) {
+          repository { name }
+          contributions { totalCount }
+        }
+        pullRequestReviewContributionsByRepository(maxRepositories: 10) {
+          repository { name }
+          contributions { totalCount }
+        }
+      }
+    }
+  }`;
+
+async function fetchTopRepo(today) {
+  // Rolling 7-day window (last 6 days + today) aligned to this week.
+  const from = new Date(Date.parse(today + "T00:00:00Z") - 6 * DAY_MS).toISOString();
+  const to = new Date(Date.parse(today + "T00:00:00Z") + DAY_MS - 1).toISOString();
+
+  console.log(`Fetching top repo for ${from.slice(0, 10)} \u2192 ${to.slice(0, 10)}...`);
+
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    const res = await fetch(GITHUB_API, {
+      method: "POST",
+      headers: {
+        Authorization: `bearer ${TOKEN}`,
+        "Content-Type": "application/json",
+        "User-Agent": "profile-readme-stats",
+      },
+      body: JSON.stringify({ query: TOP_REPO_QUERY, variables: { login: USERNAME, from, to } }),
+    });
+
+    if (res.status === 403) {
+      const wait = parseInt(res.headers.get("retry-after") || "0", 10) * 1000 || attempt * 15000;
+      console.warn(`Rate limited fetching top repo. Waiting ${wait / 1000}s (attempt ${attempt}/3)...`);
+      await sleep(wait);
+      continue;
+    }
+    if (!res.ok) throw new Error(`GitHub API error ${res.status}: ${await res.text()}`);
+
+    const json = await res.json();
+    if (json.errors?.length) throw new Error(`GraphQL errors: ${json.errors.map((e) => e.message).join("; ")}`);
+
+    const col = json.data.user.contributionsCollection;
+    const counts = new Map();
+    const lists = [
+      ...col.commitContributionsByRepository,
+      ...col.pullRequestContributionsByRepository,
+      ...col.issueContributionsByRepository,
+      ...col.pullRequestReviewContributionsByRepository,
+    ];
+    for (const entry of lists) {
+      const name = entry.repository?.name;
+      if (!name) continue;
+      counts.set(name, (counts.get(name) || 0) + entry.contributions.totalCount);
+    }
+
+    let top = null;
+    for (const [name, count] of counts) {
+      if (!top || count > top.count) top = { name, count };
+    }
+    return top;
+  }
+  throw new Error("Failed to fetch top repo after 3 attempts");
+}
+
 // ─── Streak / Grade Computation ──────────────────────────────────────────────
 
 const DAY_MS = 864e5;
 const toDate = (s) => new Date(s + "T00:00:00Z");
 
-function computeStats(weeks, from, to) {
+function computeStats(weeks, to) {
   // Deduplicate days by date (the two fetch windows share a boundary week).
   const byDate = new Map();
   for (const week of weeks) {
@@ -230,11 +308,8 @@ function computeStats(weeks, from, to) {
   const yearStart = `${new Date().getUTCFullYear()}-01-01`;
   const thisYear = dates.filter((d) => d >= yearStart).reduce((a, d) => a + byDate.get(d), 0);
 
-  // Consistency: share of days in the window with at least one contribution.
-  const totalDays = Math.round((Date.parse(to + "T00:00:00Z") - Date.parse(from + "T00:00:00Z")) / DAY_MS) + 1;
-  const consistency = Math.round((activeDays / totalDays) * 100);
-
-  return { total, activeDays, thisYear, currentStreak: current, longestStreak: longest, consistency, dates, byDate };
+  // Consistency metric: how many days in the window had at least one contribution.
+  return { total, activeDays, thisYear, currentStreak: current, longestStreak: longest, dates, byDate };
 }
 
 // ─── Nice Number Scale ──────────────────────────────────────────────────────
@@ -533,8 +608,14 @@ async function main() {
 
     // Stats card data — consumed by mayur-vinyl/api/stats.js
     console.log("\nFetching profile stats...");
-    const s = computeStats(weeks, from, to);
+    const s = computeStats(weeks, to);
     const profile = await fetchProfile();
+    let topRepo = null;
+    try {
+      topRepo = await fetchTopRepo(to);
+    } catch (err) {
+      console.warn(`  Top-repo fetch failed: ${err.message}`);
+    }
 
     const stats = {
       generatedAt: new Date().toISOString(),
@@ -545,7 +626,7 @@ async function main() {
         thisYear: s.thisYear,
         currentStreak: s.currentStreak,
         longestStreak: s.longestStreak,
-        consistency: s.consistency,
+        topRepo,
       },
       profile,
       // Daily series for the intensity matrix — most recent 98 days (14 weeks).
@@ -554,7 +635,8 @@ async function main() {
 
     writeFileSync(STATS_OUT_PATH, JSON.stringify(stats, null, 2), "utf-8");
     console.log(`Wrote ${STATS_OUT_PATH}`);
-    console.log(`  total ${s.total}, activeDays ${s.activeDays}, ${s.consistency}% consistent, streak ${s.currentStreak}d (max ${s.longestStreak}d)`);
+    console.log(`  total ${s.total}, activeDays ${s.activeDays}, streak ${s.currentStreak}d (max ${s.longestStreak}d)`);
+    console.log(`  top repo this week: ${topRepo ? `${topRepo.name} (${topRepo.count})` : "none"}`);
     console.log(`  repos ${profile.repositories}, stars ${profile.stars}, followers ${profile.followers}, PRs ${profile.pullRequests}`);
     console.log(`  intensity ${stats.intensity.length} pts (${stats.intensity[0].d} -> ${stats.intensity.at(-1).d})`);
   } catch (err) {

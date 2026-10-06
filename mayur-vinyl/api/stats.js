@@ -37,6 +37,7 @@ function lerpHex(a, b, t) {
 }
 
 const fmt = (n) => (n >= 1000 ? n.toLocaleString("en-US") : String(n));
+const clamp = (str, n) => (str.length > n ? str.slice(0, n - 1) + "\u2026" : str);
 
 // ─── Layout (authored at ~1:1 rendered px; GitHub renders width="100%") ────
 const W = 832;
@@ -114,8 +115,10 @@ export function renderStats(stats) {
 ${cells}
   <text x="${SQ_X + SQUARE / 2}" y="${SQ_Y + SQUARE + 16}" font-family="${MONO}" font-size="8" fill="${C.faint}" text-anchor="middle" letter-spacing="2">LAST\u00A07\u00A0WEEKS</text>`;
 
+  const topRepo = s.topRepo ? clamp(s.topRepo.name, 12) : "\u2014";
+
   const stats1 = [
-    ["CONSISTENCY", `${s.consistency}%`],
+    ["TOP\u00A0REPO\u00A0THIS\u00A0WEEK", topRepo, { size: 18 }],
     ["CURRENT\u00A0STREAK", `${s.currentStreak}d`],
     ["LONGEST\u00A0STREAK", `${s.longestStreak}d`],
     ["CONTRIBUTIONS", fmt(s.total)],
@@ -129,10 +132,11 @@ ${cells}
 
   const row = (items, yVal, yLbl) =>
     items
-      .map(([label, value], i) => {
+      .map(([label, value, opts], i) => {
         const x = colCenter(i);
+        const size = opts?.size ?? 36;
         return [
-          `  <text x="${x}" y="${yVal}" font-family="${SERIF}" font-size="36" font-weight="normal" fill="${C.value}" text-anchor="middle">${value}</text>`,
+          `  <text x="${x}" y="${yVal}" font-family="${SERIF}" font-size="${size}" font-weight="normal" fill="${C.value}" text-anchor="middle">${value}</text>`,
           `  <text x="${x}" y="${yLbl}" font-family="${MONO}" font-size="9" fill="${C.label}" text-anchor="middle" letter-spacing="2">${label}</text>`,
         ].join("\n");
       })

@@ -95,7 +95,7 @@ export function renderStats(stats) {
   const p = stats.profile;
   const heat = buildHeatmap(stats);
 
-  const head = `  <text x="${RIGHT_X}" y="${HEAD_Y}" font-family="${MONO}" font-size="10" fill="${C.faint}" letter-spacing="5">GITHUB&nbsp;STATS</text>`;
+  const head = `  <text x="${RIGHT_X}" y="${HEAD_Y}" font-family="${MONO}" font-size="10" fill="${C.faint}" letter-spacing="5">GITHUB\u00A0STATS</text>`;
 
   const rule = `  <line x1="${RIGHT_X}" y1="${RULE_Y}" x2="${W - PAD}" y2="${RULE_Y}" stroke="${C.edge}" stroke-width="1"/>`;
 
@@ -112,19 +112,19 @@ export function renderStats(stats) {
 
   const square = `  <rect x="${SQ_X}" y="${SQ_Y}" width="${SQUARE}" height="${SQUARE}" rx="3" fill="${C.panel}" stroke="${C.edge}" stroke-width="1"/>
 ${cells}
-  <text x="${SQ_X + SQUARE / 2}" y="${SQ_Y + SQUARE + 16}" font-family="${MONO}" font-size="8" fill="${C.faint}" text-anchor="middle" letter-spacing="2">LAST&nbsp;7&nbsp;WEEKS</text>`;
+  <text x="${SQ_X + SQUARE / 2}" y="${SQ_Y + SQUARE + 16}" font-family="${MONO}" font-size="8" fill="${C.faint}" text-anchor="middle" letter-spacing="2">LAST\u00A07\u00A0WEEKS</text>`;
 
   const stats1 = [
     ["GRADE", s.grade, false],
-    ["CURRENT&nbsp;STREAK", `${s.currentStreak}d`, false],
-    ["LONGEST&nbsp;STREAK", `${s.longestStreak}d`, false],
+    ["CURRENT\u00A0STREAK", `${s.currentStreak}d`, false],
+    ["LONGEST\u00A0STREAK", `${s.longestStreak}d`, false],
     ["CONTRIBUTIONS", fmt(s.total), false],
   ];
   const stats2 = [
     ["REPOSITORIES", fmt(p.repositories)],
     ["STARS", fmt(p.stars)],
     ["FOLLOWERS", fmt(p.followers)],
-    ["PULL&nbsp;REQUESTS", fmt(p.pullRequests)],
+    ["PULL\u00A0REQUESTS", fmt(p.pullRequests)],
   ];
 
   const row = (items, yVal, yLbl) =>

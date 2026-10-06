@@ -12,18 +12,21 @@
  *
  * Output:
  *   assets/contributions.svg
- *   /tmp/contribution-debug.json (development only)
+ *   mayur-vinyl/public/stats.json   (stats card data consumed by /api/stats)
+ *   contribution-debug.json (OS temp dir, development only)
  *
  * Zero external dependencies. Requires Node.js 18+ (built-in fetch).
  */
 
 import { writeFileSync } from "node:fs";
 import { resolve, dirname } from "node:path";
+import { tmpdir } from "node:os";
 import { fileURLToPath } from "node:url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const OUT_PATH = resolve(__dirname, "..", "assets", "contributions.svg");
-const DEBUG_PATH = "/tmp/contribution-debug.json";
+const STATS_OUT_PATH = resolve(__dirname, "..", "mayur-vinyl", "public", "stats.json");
+const DEBUG_PATH = resolve(tmpdir(), "contribution-debug.json");
 
 const USERNAME = "Mayur11code";
 
@@ -110,6 +113,132 @@ async function fetchContributions(from, to) {
 
 function sleep(ms) {
   return new Promise((r) => setTimeout(r, ms));
+}
+
+// ─── Profile Stats ───────────────────────────────────────────────────────────
+
+const PROFILE_QUERY = `
+  query ($login: String!) {
+    user(login: $login) {
+      contributionsCollection {
+        totalCommitContributions
+        totalPullRequestContributions
+        totalPullRequestReviewContributions
+        restrictedContributionsCount
+      }
+      repositoriesContributedTo(first: 1, contributionTypes: [COMMIT, ISSUE, PULL_REQUEST, REPOSITORY]) {
+        totalCount
+      }
+      pullRequests(first: 1) { totalCount }
+      issues(first: 1) { totalCount }
+      followers { totalCount }
+      repositories(first: 1, ownerAffiliations: OWNER, isFork: false) { totalCount }
+      stars: repositories(first: 100, ownerAffiliations: OWNER, isFork: false) {
+        totalCount
+        nodes { stargazerCount }
+      }
+      gists(first: 1) { totalCount }
+    }
+  }`;
+
+async function fetchProfile() {
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    const res = await fetch(GITHUB_API, {
+      method: "POST",
+      headers: {
+        Authorization: `bearer ${TOKEN}`,
+        "Content-Type": "application/json",
+        "User-Agent": "profile-readme-stats",
+      },
+      body: JSON.stringify({ query: PROFILE_QUERY, variables: { login: USERNAME } }),
+    });
+
+    if (res.status === 403) {
+      const wait = parseInt(res.headers.get("retry-after") || "0", 10) * 1000 || attempt * 15000;
+      console.warn(`Rate limited fetching profile. Waiting ${wait / 1000}s (attempt ${attempt}/3)...`);
+      await sleep(wait);
+      continue;
+    }
+    if (!res.ok) throw new Error(`GitHub API error ${res.status}: ${await res.text()}`);
+
+    const json = await res.json();
+    if (json.errors?.length) throw new Error(`GraphQL errors: ${json.errors.map((e) => e.message).join("; ")}`);
+
+    const u = json.data.user;
+    const starCount = u.stars.nodes.reduce((a, r) => a + r.stargazerCount, 0);
+    return {
+      repositories: u.repositories.totalCount,
+      stars: starCount,
+      pullRequests: u.pullRequests.totalCount,
+      issues: u.issues.totalCount,
+      followers: u.followers.totalCount,
+      gists: u.gists.totalCount,
+      commits: u.contributionsCollection.totalCommitContributions,
+      contributions: u.contributionsCollection.totalPullRequestContributions,
+      reviews: u.contributionsCollection.totalPullRequestReviewContributions,
+      reposContributedTo: u.repositoriesContributedTo.totalCount,
+    };
+  }
+  throw new Error("Failed to fetch profile after 3 attempts");
+}
+
+// ─── Streak / Grade Computation ──────────────────────────────────────────────
+
+const DAY_MS = 864e5;
+const toDate = (s) => new Date(s + "T00:00:00Z");
+
+function computeStats(weeks, today) {
+  // Deduplicate days by date (the two fetch windows share a boundary week).
+  const byDate = new Map();
+  for (const week of weeks) {
+    for (const day of week.contributionDays) {
+      if (day.date <= today) byDate.set(day.date, day.contributionCount);
+    }
+  }
+
+  const dates = [...byDate.keys()].sort();
+  const total = [...byDate.values()].reduce((a, b) => a + b, 0);
+  const activeDays = dates.filter((d) => byDate.get(d) > 0).length;
+  const active = new Set(dates.filter((d) => byDate.get(d) > 0));
+
+  // Longest streak: find the first day of each active run, then walk forward.
+  let longest = 0;
+  for (const d of dates) {
+    if (!active.has(d)) continue;
+    const prev = new Date(toDate(d).getTime() - DAY_MS).toISOString().slice(0, 10);
+    if (active.has(prev)) continue;
+    let run = 0;
+    let cur = d;
+    while (active.has(cur)) {
+      run++;
+      cur = new Date(toDate(cur).getTime() + DAY_MS).toISOString().slice(0, 10);
+    }
+    if (run > longest) longest = run;
+  }
+
+  // Current streak: walk back from today; a not-yet-complete today may fall
+  // back to yesterday as the streak head without breaking the run.
+  let current = 0;
+  let cursor = active.has(today) ? today : new Date(toDate(today).getTime() - DAY_MS).toISOString().slice(0, 10);
+  if (active.has(cursor)) {
+    while (active.has(cursor)) {
+      current++;
+      cursor = new Date(toDate(cursor).getTime() - DAY_MS).toISOString().slice(0, 10);
+    }
+  }
+
+  const yearStart = `${new Date().getUTCFullYear()}-01-01`;
+  const thisYear = dates.filter((d) => d >= yearStart).reduce((a, d) => a + byDate.get(d), 0);
+
+  // Grade thresholds on the rolling annual total.
+  const grade =
+    total >= 4000 ? "S" :
+    total >= 3000 ? "A" :
+    total >= 2000 ? "B" :
+    total >= 1000 ? "C" :
+    total >= 500 ? "D" : "E";
+
+  return { total, activeDays, thisYear, currentStreak: current, longestStreak: longest, grade, dates, byDate };
 }
 
 // ─── Nice Number Scale ──────────────────────────────────────────────────────
@@ -210,7 +339,7 @@ async function fetchRollingContributions() {
 
   console.log(`Total: ${totalContributions} contributions across ${filteredWeeks.length} weeks`);
 
-  return { weeks: filteredWeeks, totalContributions };
+  return { weeks: filteredWeeks, totalContributions, from: startDate.toISOString().split("T")[0], to: today };
 }
 
 // ─── Validation ─────────────────────────────────────────────────────────────
@@ -374,7 +503,7 @@ ${yTicks}
 
 async function main() {
   try {
-    const { weeks, totalContributions } = await fetchRollingContributions();
+    const { weeks, totalContributions, from, to } = await fetchRollingContributions();
 
     if (!weeks.length) {
       console.warn("No week data received. Generating empty histogram.");
@@ -405,6 +534,33 @@ async function main() {
     writeFileSync(OUT_PATH, svg, "utf-8");
     console.log(`\nWrote ${OUT_PATH}`);
     console.log(`  ${weeks.length} weeks, ${totalContributions} total contributions`);
+
+    // Stats card data — consumed by mayur-vinyl/api/stats.js
+    console.log("\nFetching profile stats...");
+    const s = computeStats(weeks, to);
+    const profile = await fetchProfile();
+
+    const stats = {
+      generatedAt: new Date().toISOString(),
+      window: { from, to },
+      contributions: {
+        total: s.total,
+        activeDays: s.activeDays,
+        thisYear: s.thisYear,
+        currentStreak: s.currentStreak,
+        longestStreak: s.longestStreak,
+        grade: s.grade,
+      },
+      profile,
+      // Daily series for the intensity matrix — most recent 98 days (14 weeks).
+      intensity: s.dates.slice(-98).map((d) => ({ d, c: s.byDate.get(d) })),
+    };
+
+    writeFileSync(STATS_OUT_PATH, JSON.stringify(stats, null, 2), "utf-8");
+    console.log(`Wrote ${STATS_OUT_PATH}`);
+    console.log(`  total ${s.total}, activeDays ${s.activeDays}, streak ${s.currentStreak}d (max ${s.longestStreak}d), grade ${s.grade}`);
+    console.log(`  repos ${profile.repositories}, stars ${profile.stars}, followers ${profile.followers}, PRs ${profile.pullRequests}`);
+    console.log(`  intensity ${stats.intensity.length} pts (${stats.intensity[0].d} -> ${stats.intensity.at(-1).d})`);
   } catch (err) {
     console.error(`\nFailed to generate contribution histogram:\n  ${err.message}`);
     process.exit(1);

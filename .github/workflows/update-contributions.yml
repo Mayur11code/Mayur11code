@@ -38,7 +38,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add assets/contributions.svg mayur-vinyl/public/contributions.svg README.md
+          git add assets/contributions.svg mayur-vinyl/public/contributions.svg mayur-vinyl/public/stats.json README.md
           if git diff --staged --quiet; then
             echo "No changes to commit."
           else

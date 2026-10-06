@@ -29,10 +29,12 @@ jobs:
       - name: Publish contribution SVG to Vercel
         run: cp assets/contributions.svg mayur-vinyl/public/contributions.svg
 
-      - name: Bust vinyl image cache
+      - name: Bust image cache (vinyl + contributions + stats)
         run: |
           ts=$(date +%s)
-          sed -i "s|api/vinyl[^\"']*\([\"']\)|api/vinyl?v=$ts\1|g" README.md
+          for api in vinyl contributions stats; do
+            sed -i -E "s|(\"https://mayur11code.vercel.app/api/$api)[^\"']*([\"'])|\1?v=$ts\2|g" README.md
+          done
 
       - name: Commit and push
         run: |

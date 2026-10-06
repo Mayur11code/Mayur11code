@@ -41,7 +41,7 @@ const clamp = (str, n) => (str.length > n ? str.slice(0, n - 1) + "\u2026" : str
 
 // ─── Layout (authored at ~1:1 rendered px; GitHub renders width="100%") ────
 const W = 832;
-const H = 180;
+const H = 186;
 const PAD = 24;
 
 const SQUARE = 128;
@@ -60,12 +60,14 @@ const COLS = 4;
 const COL_W = RIGHT_W / COLS;
 const colCenter = (c) => RIGHT_X + COL_W * c + COL_W / 2;
 
-const HEAD_Y = 40;
-const RULE_Y = 54;
-const ROW1_VAL = 98;
-const ROW1_LBL = 118;
+const HEAD_Y = 38;
+const RULE_Y = 52;
+const ROW1_VAL = 92;
+const ROW1_LBL = 112;
 const ROW2_VAL = 148;
 const ROW2_LBL = 168;
+const VALUE_SIZE = 30;
+const LABEL_SIZE = 8;
 
 // ─── Calendar-aligned 7x7 daily heatmap (columns = weeks, rows = weekdays) ─
 function buildHeatmap(stats) {
@@ -118,7 +120,7 @@ ${cells}
   const topRepo = s.topRepo ? clamp(s.topRepo.name, 12) : "\u2014";
 
   const stats1 = [
-    ["TOP\u00A0REPO\u00A0THIS\u00A0WEEK", topRepo, { size: 18 }],
+    ["TOP\u00A0REPO\u00A0THIS\u00A0WEEK", topRepo, { size: 16 }],
     ["CURRENT\u00A0STREAK", `${s.currentStreak}d`],
     ["LONGEST\u00A0STREAK", `${s.longestStreak}d`],
     ["CONTRIBUTIONS", fmt(s.total)],
@@ -134,10 +136,10 @@ ${cells}
     items
       .map(([label, value, opts], i) => {
         const x = colCenter(i);
-        const size = opts?.size ?? 36;
+        const size = opts?.size ?? VALUE_SIZE;
         return [
           `  <text x="${x}" y="${yVal}" font-family="${SERIF}" font-size="${size}" font-weight="normal" fill="${C.value}" text-anchor="middle">${value}</text>`,
-          `  <text x="${x}" y="${yLbl}" font-family="${MONO}" font-size="9" fill="${C.label}" text-anchor="middle" letter-spacing="2">${label}</text>`,
+          `  <text x="${x}" y="${yLbl}" font-family="${MONO}" font-size="${LABEL_SIZE}" fill="${C.label}" text-anchor="middle" letter-spacing="2">${label}</text>`,
         ].join("\n");
       })
       .join("\n");

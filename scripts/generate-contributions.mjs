@@ -187,12 +187,12 @@ async function fetchProfile() {
 const DAY_MS = 864e5;
 const toDate = (s) => new Date(s + "T00:00:00Z");
 
-function computeStats(weeks, today) {
+function computeStats(weeks, from, to) {
   // Deduplicate days by date (the two fetch windows share a boundary week).
   const byDate = new Map();
   for (const week of weeks) {
     for (const day of week.contributionDays) {
-      if (day.date <= today) byDate.set(day.date, day.contributionCount);
+      if (day.date <= to) byDate.set(day.date, day.contributionCount);
     }
   }
 
@@ -219,7 +219,7 @@ function computeStats(weeks, today) {
   // Current streak: walk back from today; a not-yet-complete today may fall
   // back to yesterday as the streak head without breaking the run.
   let current = 0;
-  let cursor = active.has(today) ? today : new Date(toDate(today).getTime() - DAY_MS).toISOString().slice(0, 10);
+  let cursor = active.has(to) ? to : new Date(toDate(to).getTime() - DAY_MS).toISOString().slice(0, 10);
   if (active.has(cursor)) {
     while (active.has(cursor)) {
       current++;
@@ -230,15 +230,11 @@ function computeStats(weeks, today) {
   const yearStart = `${new Date().getUTCFullYear()}-01-01`;
   const thisYear = dates.filter((d) => d >= yearStart).reduce((a, d) => a + byDate.get(d), 0);
 
-  // Grade thresholds on the rolling annual total.
-  const grade =
-    total >= 4000 ? "S" :
-    total >= 3000 ? "A" :
-    total >= 2000 ? "B" :
-    total >= 1000 ? "C" :
-    total >= 500 ? "D" : "E";
+  // Consistency: share of days in the window with at least one contribution.
+  const totalDays = Math.round((Date.parse(to + "T00:00:00Z") - Date.parse(from + "T00:00:00Z")) / DAY_MS) + 1;
+  const consistency = Math.round((activeDays / totalDays) * 100);
 
-  return { total, activeDays, thisYear, currentStreak: current, longestStreak: longest, grade, dates, byDate };
+  return { total, activeDays, thisYear, currentStreak: current, longestStreak: longest, consistency, dates, byDate };
 }
 
 // ─── Nice Number Scale ──────────────────────────────────────────────────────
@@ -537,7 +533,7 @@ async function main() {
 
     // Stats card data — consumed by mayur-vinyl/api/stats.js
     console.log("\nFetching profile stats...");
-    const s = computeStats(weeks, to);
+    const s = computeStats(weeks, from, to);
     const profile = await fetchProfile();
 
     const stats = {
@@ -549,7 +545,7 @@ async function main() {
         thisYear: s.thisYear,
         currentStreak: s.currentStreak,
         longestStreak: s.longestStreak,
-        grade: s.grade,
+        consistency: s.consistency,
       },
       profile,
       // Daily series for the intensity matrix — most recent 98 days (14 weeks).
@@ -558,7 +554,7 @@ async function main() {
 
     writeFileSync(STATS_OUT_PATH, JSON.stringify(stats, null, 2), "utf-8");
     console.log(`Wrote ${STATS_OUT_PATH}`);
-    console.log(`  total ${s.total}, activeDays ${s.activeDays}, streak ${s.currentStreak}d (max ${s.longestStreak}d), grade ${s.grade}`);
+    console.log(`  total ${s.total}, activeDays ${s.activeDays}, ${s.consistency}% consistent, streak ${s.currentStreak}d (max ${s.longestStreak}d)`);
     console.log(`  repos ${profile.repositories}, stars ${profile.stars}, followers ${profile.followers}, PRs ${profile.pullRequests}`);
     console.log(`  intensity ${stats.intensity.length} pts (${stats.intensity[0].d} -> ${stats.intensity.at(-1).d})`);
   } catch (err) {

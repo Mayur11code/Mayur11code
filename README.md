@@ -27,6 +27,6 @@ Delhi, India · building quietly.
 
 <img src="https://mayur11code.vercel.app/api/contributions" width="100%" alt="contribution activity">
 
-<img src="https://mayur11code.vercel.app/api/stats?v=1788960000" width="100%" alt="github stats — grade, streaks, contributions and profile metrics">
+<img src="https://mayur11code.vercel.app/api/stats?v=1788960000" width="100%" alt="github stats — consistency, streaks, contributions and profile metrics">
 
 </div>

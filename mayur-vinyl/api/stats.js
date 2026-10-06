@@ -115,10 +115,10 @@ ${cells}
   <text x="${SQ_X + SQUARE / 2}" y="${SQ_Y + SQUARE + 16}" font-family="${MONO}" font-size="8" fill="${C.faint}" text-anchor="middle" letter-spacing="2">LAST\u00A07\u00A0WEEKS</text>`;
 
   const stats1 = [
-    ["GRADE", s.grade, false],
-    ["CURRENT\u00A0STREAK", `${s.currentStreak}d`, false],
-    ["LONGEST\u00A0STREAK", `${s.longestStreak}d`, false],
-    ["CONTRIBUTIONS", fmt(s.total), false],
+    ["CONSISTENCY", `${s.consistency}%`],
+    ["CURRENT\u00A0STREAK", `${s.currentStreak}d`],
+    ["LONGEST\u00A0STREAK", `${s.longestStreak}d`],
+    ["CONTRIBUTIONS", fmt(s.total)],
   ];
   const stats2 = [
     ["REPOSITORIES", fmt(p.repositories)],

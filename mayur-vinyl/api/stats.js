@@ -120,7 +120,7 @@ ${cells}
   const topRepo = s.topRepo ? clamp(s.topRepo.name, 12) : "\u2014";
 
   const stats1 = [
-    ["TOP\u00A0REPO\u00A0THIS\u00A0WEEK", topRepo, { size: 24 }],
+    ["TOP\u00A0REPO\u00A0THIS\u00A0WEEK", topRepo, { size: 30 }],
     ["CURRENT\u00A0STREAK", `${s.currentStreak}d`],
     ["LONGEST\u00A0STREAK", `${s.longestStreak}d`],
     ["CONTRIBUTIONS", fmt(s.total)],

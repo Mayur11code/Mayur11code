@@ -4,6 +4,10 @@
 
 *systems · software · intelligence*
 
+<table>
+<tr>
+<td width="55%" valign="middle">
+
 <i>"i like understanding how things work,<br>then making them work differently."</i>
 
 currently exploring distributed systems,<br>AI, and developer tools.
@@ -12,10 +16,17 @@ forge · funcundo · rammy · custos · indago
 
 Delhi, India · building quietly.
 
-<img src="https://mayur11code.vercel.app/api/vinyl?v=1791263937" width="280" alt="rotating vinyl record with profile view count">
+</td>
+<td width="45%" align="center" valign="middle">
 
-<img src="https://mayur11code.vercel.app/api/contributions?v=1791263937" width="100%" alt="contribution activity">
+<img src="https://mayur11code.vercel.app/api/vinyl?v=1791263937" width="280" alt="rotating vinyl record with profile view count" />
 
-<img src="https://mayur11code.vercel.app/api/stats?v=1791263937" width="100%" alt="github stats — top repo, streaks, contributions and profile metrics">
+</td>
+</tr>
+</table>
+
+<img src="https://mayur11code.vercel.app/api/contributions" width="100%" alt="contribution activity">
+
+<img src="https://mayur11code.vercel.app/api/stats?v=1788960000" width="100%" alt="github stats — consistency, streaks, contributions and profile metrics">
 
 </div>

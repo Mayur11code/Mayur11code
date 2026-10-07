@@ -13,10 +13,9 @@ function getStats() {
 
 // ─── Palette ────────────────────────────────────────────────────────────────
 const C = {
-  bg: "#08090b",
+  bg: "#0d1117",
   panel: "#0e1013",
   edge: "#1a1d21",
-  hairline: "#25282d",
   value: "#c5c7ca",
   label: "#686b70",
   faint: "#505358",
@@ -148,7 +147,7 @@ ${cells}
   const r2 = row(stats2, ROW2_VAL, ROW2_LBL);
 
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}">
-  <rect x="0.5" y="0.5" width="${W - 1}" height="${H - 1}" rx="6" fill="${C.bg}" stroke="${C.hairline}" stroke-width="1"/>
+  <rect x="0.5" y="0.5" width="${W - 1}" height="${H - 1}" rx="6" fill="${C.bg}"/>
 ${head}
 ${rule}
 ${square}

@@ -15,7 +15,8 @@ function renderVinyl(count) {
     <filter id="grain" x="0%" y="0%" width="100%" height="100%">
       <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="4" stitchTiles="stitch" result="n"/>
       <feColorMatrix type="saturate" values="0" in="n" result="g"/>
-      <feBlend in="SourceGraphic" in2="g" mode="multiply"/>
+      <feBlend in="SourceGraphic" in2="g" mode="multiply" result="b"/>
+      <feComposite in="b" in2="SourceGraphic" operator="in"/>
     </filter>
     <radialGradient id="hl" cx="32%" cy="28%" r="50%">
       <stop offset="0%" stop-color="#fff" stop-opacity="0.14"/>

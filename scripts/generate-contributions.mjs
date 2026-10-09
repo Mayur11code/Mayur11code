@@ -120,24 +120,13 @@ function sleep(ms) {
 const PROFILE_QUERY = `
   query ($login: String!) {
     user(login: $login) {
-      contributionsCollection {
-        totalCommitContributions
-        totalPullRequestContributions
-        totalPullRequestReviewContributions
-        restrictedContributionsCount
-      }
-      repositoriesContributedTo(first: 1, contributionTypes: [COMMIT, ISSUE, PULL_REQUEST, REPOSITORY]) {
-        totalCount
-      }
       pullRequests(first: 1) { totalCount }
-      issues(first: 1) { totalCount }
       followers { totalCount }
       repositories(first: 1, ownerAffiliations: OWNER, isFork: false) { totalCount }
       stars: repositories(first: 100, ownerAffiliations: OWNER, isFork: false) {
         totalCount
         nodes { stargazerCount }
       }
-      gists(first: 1) { totalCount }
     }
   }`;
 
@@ -170,13 +159,7 @@ async function fetchProfile() {
       repositories: u.repositories.totalCount,
       stars: starCount,
       pullRequests: u.pullRequests.totalCount,
-      issues: u.issues.totalCount,
       followers: u.followers.totalCount,
-      gists: u.gists.totalCount,
-      commits: u.contributionsCollection.totalCommitContributions,
-      contributions: u.contributionsCollection.totalPullRequestContributions,
-      reviews: u.contributionsCollection.totalPullRequestReviewContributions,
-      reposContributedTo: u.repositoriesContributedTo.totalCount,
     };
   }
   throw new Error("Failed to fetch profile after 3 attempts");

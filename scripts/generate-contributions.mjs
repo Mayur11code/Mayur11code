@@ -607,38 +607,47 @@ async function main() {
     console.log(`  ${weeks.length} weeks, ${totalContributions} total contributions`);
 
     // Stats card data — consumed by mayur-vinyl/api/stats.js
-    console.log("\nFetching profile stats...");
     const s = computeStats(weeks, to);
-    const profile = await fetchProfile();
-    let topRepo = null;
+    let profile = null;
     try {
-      topRepo = await fetchTopRepo(to);
+      console.log("\nFetching profile stats...");
+      profile = await fetchProfile();
     } catch (err) {
-      console.warn(`  Top-repo fetch failed: ${err.message}`);
+      console.warn(`  Profile fetch failed: ${err.message}`);
+      console.warn("  Keeping previous stats.json; contributions.svg still published.");
     }
 
-    const stats = {
-      generatedAt: new Date().toISOString(),
-      window: { from, to },
-      contributions: {
-        total: s.total,
-        activeDays: s.activeDays,
-        thisYear: s.thisYear,
-        currentStreak: s.currentStreak,
-        longestStreak: s.longestStreak,
-        topRepo,
-      },
-      profile,
-      // Daily series for the intensity matrix — most recent 98 days (14 weeks).
-      intensity: s.dates.slice(-98).map((d) => ({ d, c: s.byDate.get(d) })),
-    };
+    if (profile) {
+      let topRepo = null;
+      try {
+        topRepo = await fetchTopRepo(to);
+      } catch (err) {
+        console.warn(`  Top-repo fetch failed: ${err.message}`);
+      }
 
-    writeFileSync(STATS_OUT_PATH, JSON.stringify(stats, null, 2), "utf-8");
-    console.log(`Wrote ${STATS_OUT_PATH}`);
-    console.log(`  total ${s.total}, activeDays ${s.activeDays}, streak ${s.currentStreak}d (max ${s.longestStreak}d)`);
-    console.log(`  top repo this week: ${topRepo ? `${topRepo.name} (${topRepo.count})` : "none"}`);
-    console.log(`  repos ${profile.repositories}, stars ${profile.stars}, followers ${profile.followers}, PRs ${profile.pullRequests}`);
-    console.log(`  intensity ${stats.intensity.length} pts (${stats.intensity[0].d} -> ${stats.intensity.at(-1).d})`);
+      const stats = {
+        generatedAt: new Date().toISOString(),
+        window: { from, to },
+        contributions: {
+          total: s.total,
+          activeDays: s.activeDays,
+          thisYear: s.thisYear,
+          currentStreak: s.currentStreak,
+          longestStreak: s.longestStreak,
+          topRepo,
+        },
+        profile,
+        // Daily series for the intensity matrix — most recent 98 days (14 weeks).
+        intensity: s.dates.slice(-98).map((d) => ({ d, c: s.byDate.get(d) })),
+      };
+
+      writeFileSync(STATS_OUT_PATH, JSON.stringify(stats, null, 2), "utf-8");
+      console.log(`Wrote ${STATS_OUT_PATH}`);
+      console.log(`  total ${s.total}, activeDays ${s.activeDays}, streak ${s.currentStreak}d (max ${s.longestStreak}d)`);
+      console.log(`  top repo this week: ${topRepo ? `${topRepo.name} (${topRepo.count})` : "none"}`);
+      console.log(`  repos ${profile.repositories}, stars ${profile.stars}, followers ${profile.followers}, PRs ${profile.pullRequests}`);
+      console.log(`  intensity ${stats.intensity.length} pts (${stats.intensity[0].d} -> ${stats.intensity.at(-1).d})`);
+    }
   } catch (err) {
     console.error(`\nFailed to generate contribution histogram:\n  ${err.message}`);
     process.exit(1);

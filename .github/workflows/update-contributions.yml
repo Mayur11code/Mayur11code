@@ -23,7 +23,7 @@ jobs:
 
       - name: Generate contribution histogram
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.GH_PAT }}
         run: node scripts/generate-contributions.mjs
 
       - name: Publish contribution SVG to Vercel

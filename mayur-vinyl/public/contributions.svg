@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 846 280" width="846" height="280">
   <text x="381" y="16" font-family="'Courier New','Lucida Console',monospace" font-size="11" fill="#686b70" text-anchor="middle" letter-spacing="3">C O N T R I B U T I O N S</text>
   <line x1="0" y1="240" x2="762" y2="240" stroke="#25282d" stroke-width="1" opacity="0.6"/>
-  <rect x="6" y="207.99" width="8" height="32.01" fill="#525459" opacity="0.58" rx="1"/>
+  <rect x="6" y="211.91" width="8" height="28.09" fill="#4f5256" opacity="0.57" rx="1"/>
   <rect x="20" y="226.28" width="8" height="13.72" fill="#45484c" opacity="0.54" rx="1"/>
   <rect x="34" y="228.89" width="8" height="11.11" fill="#43464b" opacity="0.53" rx="1"/>
   <rect x="48" y="239.00" width="8" height="1.00" fill="#3b3e43" opacity="0.30" rx="1"/>
@@ -51,10 +51,10 @@
   <rect x="664" y="86.47" width="8" height="153.53" fill="#a7a9ad" opacity="0.89" rx="1"/>
   <rect x="678" y="115.87" width="8" height="124.13" fill="#929599" opacity="0.82" rx="1"/>
   <rect x="692" y="72.09" width="8" height="167.91" fill="#b1b3b7" opacity="0.93" rx="1"/>
-  <rect x="706" y="145.27" width="8" height="94.73" fill="#7e8084" opacity="0.74" rx="1"/>
-  <rect x="720" y="181.20" width="8" height="58.80" fill="#64676c" opacity="0.65" rx="1"/>
+  <rect x="706" y="144.61" width="8" height="95.39" fill="#7e8185" opacity="0.74" rx="1"/>
+  <rect x="720" y="179.89" width="8" height="60.11" fill="#65686c" opacity="0.65" rx="1"/>
   <rect x="734" y="203.41" width="8" height="36.59" fill="#55585c" opacity="0.59" rx="1"/>
-  <rect x="748" y="232.81" width="8" height="7.19" fill="#404348" opacity="0.52" rx="1"/>
+  <rect x="748" y="223.67" width="8" height="16.33" fill="#47494e" opacity="0.54" rx="1"/>
   <text x="24.00" y="262" font-family="'Courier New','Lucida Console',monospace" font-size="10" fill="#686b70" text-anchor="middle" letter-spacing="1">OCT</text>
   <text x="80.00" y="262" font-family="'Courier New','Lucida Console',monospace" font-size="10" fill="#686b70" text-anchor="middle" letter-spacing="1">NOV</text>
   <text x="143.00" y="262" font-family="'Courier New','Lucida Console',monospace" font-size="10" fill="#686b70" text-anchor="middle" letter-spacing="1">DEC</text>

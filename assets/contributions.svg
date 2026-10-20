@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 846 280" width="846" height="280">
   <text x="381" y="16" font-family="'Courier New','Lucida Console',monospace" font-size="11" fill="#686b70" text-anchor="middle" letter-spacing="3">C O N T R I B U T I O N S</text>
   <line x1="0" y1="240" x2="762" y2="240" stroke="#25282d" stroke-width="1" opacity="0.6"/>
-  <rect x="6" y="226.28" width="8" height="13.72" fill="#45484c" opacity="0.54" rx="1"/>
+  <rect x="6" y="227.59" width="8" height="12.41" fill="#44474c" opacity="0.53" rx="1"/>
   <rect x="20" y="228.89" width="8" height="11.11" fill="#43464b" opacity="0.53" rx="1"/>
   <rect x="34" y="239.00" width="8" height="1.00" fill="#3b3e43" opacity="0.30" rx="1"/>
   <rect x="48" y="239.00" width="8" height="1.00" fill="#3b3e43" opacity="0.30" rx="1"/>
@@ -27,8 +27,8 @@
   <rect x="328" y="189.04" width="8" height="50.96" fill="#5f6266" opacity="0.63" rx="1"/>
   <rect x="342" y="183.81" width="8" height="56.19" fill="#63656a" opacity="0.64" rx="1"/>
   <rect x="356" y="203.41" width="8" height="36.59" fill="#55585c" opacity="0.59" rx="1"/>
-  <rect x="370" y="239.00" width="8" height="1.00" fill="#3b3e43" opacity="0.50" rx="1"/>
-  <rect x="384" y="226.28" width="8" height="13.72" fill="#45484c" opacity="0.54" rx="1"/>
+  <rect x="370" y="230.85" width="8" height="9.15" fill="#414449" opacity="0.52" rx="1"/>
+  <rect x="384" y="234.77" width="8" height="5.23" fill="#3f4247" opacity="0.51" rx="1"/>
   <rect x="398" y="230.85" width="8" height="9.15" fill="#414449" opacity="0.52" rx="1"/>
   <rect x="412" y="217.13" width="8" height="22.87" fill="#4b4e53" opacity="0.56" rx="1"/>
   <rect x="426" y="171.40" width="8" height="68.60" fill="#6b6e72" opacity="0.68" rx="1"/>
@@ -54,7 +54,7 @@
   <rect x="706" y="179.89" width="8" height="60.11" fill="#65686c" opacity="0.65" rx="1"/>
   <rect x="720" y="203.41" width="8" height="36.59" fill="#55585c" opacity="0.59" rx="1"/>
   <rect x="734" y="179.24" width="8" height="60.76" fill="#66686d" opacity="0.66" rx="1"/>
-  <rect x="748" y="227.59" width="8" height="12.41" fill="#44474c" opacity="0.53" rx="1"/>
+  <rect x="748" y="218.44" width="8" height="21.56" fill="#4a4d52" opacity="0.56" rx="1"/>
   <text x="66.00" y="262" font-family="'Courier New','Lucida Console',monospace" font-size="10" fill="#686b70" text-anchor="middle" letter-spacing="1">NOV</text>
   <text x="129.00" y="262" font-family="'Courier New','Lucida Console',monospace" font-size="10" fill="#686b70" text-anchor="middle" letter-spacing="1">DEC</text>
   <text x="185.00" y="262" font-family="'Courier New','Lucida Console',monospace" font-size="10" fill="#686b70" text-anchor="middle" letter-spacing="1">JAN</text>

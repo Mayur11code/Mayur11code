@@ -1,18 +1,18 @@
 {
-  "generatedAt": "2026-10-20T21:20:26.813Z",
+  "generatedAt": "2026-10-21T03:40:42.206Z",
   "window": {
-    "from": "2025-10-20",
-    "to": "2026-10-20"
+    "from": "2025-10-21",
+    "to": "2026-10-21"
   },
   "contributions": {
-    "total": 3707,
+    "total": 3699,
     "activeDays": 260,
-    "thisYear": 3671,
-    "currentStreak": 9,
+    "thisYear": 3674,
+    "currentStreak": 10,
     "longestStreak": 87,
     "topRepo": {
       "name": "Forge",
-      "count": 40
+      "count": 38
     }
   },
   "profile": {
@@ -22,10 +22,6 @@
     "followers": 30
   },
   "intensity": [
-    {
-      "d": "2026-07-15",
-      "c": 4
-    },
     {
       "d": "2026-07-16",
       "c": 3
@@ -413,6 +409,10 @@
     {
       "d": "2026-10-20",
       "c": 24
+    },
+    {
+      "d": "2026-10-21",
+      "c": 3
     }
   ]
 }

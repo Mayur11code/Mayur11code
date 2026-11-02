@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-11-01T21:46:55.726Z",
+  "generatedAt": "2026-11-02T04:51:57.923Z",
   "window": {
-    "from": "2025-11-01",
-    "to": "2026-11-01"
+    "from": "2025-11-02",
+    "to": "2026-11-02"
   },
   "contributions": {
     "total": 3769,
     "activeDays": 263,
     "thisYear": 3769,
-    "currentStreak": 2,
+    "currentStreak": 0,
     "longestStreak": 87,
     "topRepo": {
       "name": "Forgent-demo",
@@ -22,10 +22,6 @@
     "followers": 32
   },
   "intensity": [
-    {
-      "d": "2026-07-27",
-      "c": 19
-    },
     {
       "d": "2026-07-28",
       "c": 25
@@ -412,6 +408,10 @@
     },
     {
       "d": "2026-11-01",
+      "c": 0
+    },
+    {
+      "d": "2026-11-02",
       "c": 0
     }
   ]

@@ -54,7 +54,7 @@
   <rect x="706" y="160.29" width="8" height="79.71" fill="#73767a" opacity="0.70" rx="1"/>
   <rect x="720" y="175.97" width="8" height="64.03" fill="#686b6f" opacity="0.66" rx="1"/>
   <rect x="734" y="226.28" width="8" height="13.72" fill="#45484c" opacity="0.54" rx="1"/>
-  <rect x="748" y="158.99" width="8" height="81.01" fill="#74777b" opacity="0.71" rx="1"/>
+  <rect x="748" y="155.72" width="8" height="84.28" fill="#76797d" opacity="0.71" rx="1"/>
   <text x="31.00" y="262" font-family="'Courier New','Lucida Console',monospace" font-size="10" fill="#686b70" text-anchor="middle" letter-spacing="1">NOV</text>
   <text x="87.00" y="262" font-family="'Courier New','Lucida Console',monospace" font-size="10" fill="#686b70" text-anchor="middle" letter-spacing="1">DEC</text>
   <text x="143.00" y="262" font-family="'Courier New','Lucida Console',monospace" font-size="10" fill="#686b70" text-anchor="middle" letter-spacing="1">JAN</text>

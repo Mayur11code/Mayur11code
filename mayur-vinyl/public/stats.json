@@ -1,18 +1,18 @@
 {
-  "generatedAt": "2026-11-13T23:19:28.502Z",
+  "generatedAt": "2026-11-14T05:20:55.225Z",
   "window": {
-    "from": "2025-11-13",
-    "to": "2026-11-13"
+    "from": "2025-11-14",
+    "to": "2026-11-14"
   },
   "contributions": {
-    "total": 4226,
-    "activeDays": 272,
-    "thisYear": 4226,
-    "currentStreak": 8,
+    "total": 4230,
+    "activeDays": 273,
+    "thisYear": 4230,
+    "currentStreak": 9,
     "longestStreak": 87,
     "topRepo": {
       "name": "Afterfact",
-      "count": 95
+      "count": 94
     }
   },
   "profile": {
@@ -22,10 +22,6 @@
     "followers": 32
   },
   "intensity": [
-    {
-      "d": "2026-08-08",
-      "c": 35
-    },
     {
       "d": "2026-08-09",
       "c": 32
@@ -413,6 +409,10 @@
     {
       "d": "2026-11-13",
       "c": 25
+    },
+    {
+      "d": "2026-11-14",
+      "c": 4
     }
   ]
 }

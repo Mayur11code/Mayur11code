@@ -12,7 +12,7 @@
 
 currently exploring distributed systems,<br>AI, and developer tools.
 
-forge · funcundo · rammy · custos · indago
+forge · funcundo · rammy · custos · indago · FocusFlow · Afterfact
 
 Delhi, India · building quietly.
 

@@ -12,7 +12,7 @@
 
 currently exploring distributed systems,<br>AI, and developer tools.
 
-indago · rammy · afterfact · custos · forge · funcundo · lexi-assist
+rammy · forge · afterfact · indago · custos · funcundo · lexi-assist
 
 Delhi, India · building quietly.
 
@@ -41,22 +41,11 @@ Delhi, India · building quietly.
 <tr>
 <td width="50%" valign="top" align="left">
 
-<a href="https://github.com/NERIS-v/INDAGO">
-  <img src="./assets/9.png" width="240" alt="INDAGO — Evidence-to-Graph Investigative Intelligence" />
-</a>
-<br>
-<b><a href="https://github.com/NERIS-v/INDAGO">INDAGO</a></b> &nbsp;·&nbsp; <a href="https://github.com/NERIS-v/INDAGO"><i>Repository ↗</i></a>
-<br>
-Evidence-to-graph investigative intelligence system turning fragmented records into defensible, reviewable leads.
-<br>
-<code>TypeScript</code> · <code>Graph Analytics</code> · <code>Temporal</code> · <code>Zod</code>
-
-</td>
-<td width="50%" valign="top" align="left">
-
-<a href="https://github.com/Mayur11code/RAMMY">
-  <img src="./assets/rammy.png" width="240" alt="RAMMY — Deterministic Research OS" />
-</a>
+<div align="center">
+  <a href="https://github.com/Mayur11code/RAMMY">
+    <img src="./assets/rammy.png" width="240" alt="RAMMY — Deterministic Research OS" />
+  </a>
+</div>
 <br>
 <b><a href="https://github.com/Mayur11code/RAMMY">RAMMY</a></b> &nbsp;·&nbsp; <a href="https://github.com/Mayur11code/RAMMY"><i>Repository ↗</i></a>
 <br>
@@ -65,13 +54,30 @@ Deterministic evidence-intelligence platform & Research OS: retrieval → eviden
 <code>TypeScript</code> · <code>PostgreSQL</code> · <code>pgvector</code> · <code>Drizzle ORM</code>
 
 </td>
+<td width="50%" valign="top" align="left">
+
+<div align="center">
+  <a href="https://github.com/Mayur11code/Forge">
+    <img src="./assets/9.png" width="240" alt="Forge — Multi-Tenant DAG Workflow Orchestration Engine" />
+  </a>
+</div>
+<br>
+<b><a href="https://github.com/Mayur11code/Forge">Forge</a></b> &nbsp;·&nbsp; <a href="https://forge-pi-jet.vercel.app/"><i>Live Demo ↗</i></a>
+<br>
+Multi-tenant DAG workflow orchestration engine built for concurrency, isolated by design, and driven by immutable events.
+<br>
+<code>Next.js 16</code> · <code>React Flow</code> · <code>Pusher</code> · <code>PostgreSQL</code> · <code>Redis</code>
+
+</td>
 </tr>
 <tr>
 <td width="50%" valign="top" align="left">
 
-<a href="https://github.com/Mayur11code/Afterfact">
-  <img src="./assets/afterfact-preview.png" width="240" alt="Afterfact — Real-Time Freshness Verification & Drift Detection" />
-</a>
+<div align="center">
+  <a href="https://github.com/Mayur11code/Afterfact">
+    <img src="./assets/afterfact-preview.png" width="240" alt="Afterfact — Real-Time Freshness Verification & Drift Detection" />
+  </a>
+</div>
 <br>
 <b><a href="https://github.com/Mayur11code/Afterfact">Afterfact</a></b> &nbsp;·&nbsp; <a href="https://afterfact-beta.vercel.app"><i>Live Demo ↗</i></a>
 <br>
@@ -82,9 +88,28 @@ Real-time freshness verification and semantic drift detection engine for AI-gene
 </td>
 <td width="50%" valign="top" align="left">
 
-<a href="https://github.com/Mayur11code/CUSTOS.dev">
-  <img src="./assets/custos-preview.png" width="240" alt="CUSTOS — Human-in-the-Loop Middleware for AI Agents" />
-</a>
+<div align="center">
+  <a href="https://github.com/NERIS-v/INDAGO">
+    <img src="./assets/9.png" width="240" alt="INDAGO — Evidence-to-Graph Investigative Intelligence" />
+  </a>
+</div>
+<br>
+<b><a href="https://github.com/NERIS-v/INDAGO">INDAGO</a></b> &nbsp;·&nbsp; <a href="https://github.com/NERIS-v/INDAGO"><i>Repository ↗</i></a>
+<br>
+Evidence-to-graph investigative intelligence system turning fragmented records into defensible, reviewable leads.
+<br>
+<code>TypeScript</code> · <code>Graph Analytics</code> · <code>Temporal</code> · <code>Zod</code>
+
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top" align="left">
+
+<div align="center">
+  <a href="https://github.com/Mayur11code/CUSTOS.dev">
+    <img src="./assets/custos-preview.png" width="240" alt="CUSTOS — Human-in-the-Loop Middleware for AI Agents" />
+  </a>
+</div>
 <br>
 <b><a href="https://github.com/Mayur11code/CUSTOS.dev">CUSTOS</a></b> &nbsp;·&nbsp; <a href="https://github.com/Mayur11code/CUSTOS.dev"><i>Repository ↗</i></a>
 <br>
@@ -93,26 +118,13 @@ Human-in-the-loop OpenAI-compatible proxy inserting deterministic review and app
 <code>Node.js 18+</code> · <code>TypeScript</code> · <code>OpenAI API</code> · <code>DevTools</code>
 
 </td>
-</tr>
-<tr>
 <td width="50%" valign="top" align="left">
 
-<a href="https://github.com/Mayur11code/Forge">
-  <img src="./assets/9.png" width="240" alt="Forge — Multi-Tenant DAG Workflow Orchestration Engine" />
-</a>
-<br>
-<b><a href="https://github.com/Mayur11code/Forge">Forge</a></b> &nbsp;·&nbsp; <a href="https://forge-pi-jet.vercel.app/"><i>Live Demo ↗</i></a>
-<br>
-Multi-tenant DAG workflow orchestration engine built for concurrency, isolated by design, and driven by immutable events.
-<br>
-<code>Next.js 16</code> · <code>React Flow</code> · <code>Pusher</code> · <code>PostgreSQL</code> · <code>Redis</code>
-
-</td>
-<td width="50%" valign="top" align="left">
-
-<a href="https://github.com/Mankirat684/FuncUndo-side">
-  <img src="./assets/9.png" width="240" alt="FuncUndo — The Semantic Code Time Machine" />
-</a>
+<div align="center">
+  <a href="https://github.com/Mankirat684/FuncUndo-side">
+    <img src="./assets/9.png" width="240" alt="FuncUndo — The Semantic Code Time Machine" />
+  </a>
+</div>
 <br>
 <b><a href="https://github.com/Mankirat684/FuncUndo-side">FuncUndo</a></b> &nbsp;·&nbsp; <a href="https://github.com/Mankirat684/FuncUndo-side"><i>Repository ↗</i></a>
 <br>
@@ -125,9 +137,11 @@ The semantic code time machine for VS Code. Understands ASTs to track function l
 <tr>
 <td width="50%" valign="top" align="left">
 
-<a href="https://github.com/Mayur11code/LEXI-ASSIST">
-  <img src="./assets/9.png" width="240" alt="LEXI-ASSIST — Intelligent Legal Advisor" />
-</a>
+<div align="center">
+  <a href="https://github.com/Mayur11code/LEXI-ASSIST">
+    <img src="./assets/9.png" width="240" alt="LEXI-ASSIST — Intelligent Legal Advisor" />
+  </a>
+</div>
 <br>
 <b><a href="https://github.com/Mayur11code/LEXI-ASSIST">LEXI-ASSIST</a></b> &nbsp;·&nbsp; <a href="https://lexi-assist.vercel.app/"><i>Live Demo ↗</i></a>
 <br>

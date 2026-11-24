@@ -47,7 +47,7 @@ Delhi, India · building quietly.
   </a>
 </div>
 <br>
-<b><a href="https://github.com/Mayur11code/RAMMY">RAMMY</a></b> &nbsp;·&nbsp; <a href="https://github.com/Mayur11code/RAMMY"><i>Repository ↗</i></a>
+<b>RAMMY</b> &nbsp; <a href="https://github.com/Mayur11code/RAMMY"><img src="./assets/badge-code.svg" height="18" alt="code" align="absmiddle" /></a>
 <br>
 Deterministic evidence-intelligence platform & Research OS: retrieval → evidence packs → knowledge graph → grounded lens analysis.
 <br>
@@ -62,7 +62,7 @@ Deterministic evidence-intelligence platform & Research OS: retrieval → eviden
   </a>
 </div>
 <br>
-<b><a href="https://github.com/Mayur11code/Forge">Forge</a></b> &nbsp;·&nbsp; <a href="https://forge-pi-jet.vercel.app/"><i>Live Demo ↗</i></a>
+<b>Forge</b> &nbsp; <a href="https://github.com/Mayur11code/Forge"><img src="./assets/badge-code.svg" height="18" alt="code" align="absmiddle" /></a> &nbsp; <a href="https://forge-pi-jet.vercel.app/"><img src="./assets/badge-demo.svg" height="18" alt="live" align="absmiddle" /></a>
 <br>
 Multi-tenant DAG workflow orchestration engine built for concurrency, isolated by design, and driven by immutable events.
 <br>
@@ -79,7 +79,7 @@ Multi-tenant DAG workflow orchestration engine built for concurrency, isolated b
   </a>
 </div>
 <br>
-<b><a href="https://github.com/Mayur11code/Afterfact">Afterfact</a></b> &nbsp;·&nbsp; <a href="https://afterfact-beta.vercel.app"><i>Live Demo ↗</i></a>
+<b>Afterfact</b> &nbsp; <a href="https://github.com/Mayur11code/Afterfact"><img src="./assets/badge-code.svg" height="18" alt="code" align="absmiddle" /></a> &nbsp; <a href="https://afterfact-beta.vercel.app"><img src="./assets/badge-demo.svg" height="18" alt="live" align="absmiddle" /></a>
 <br>
 Real-time freshness verification and semantic drift detection engine for AI-generated answers across evolving knowledge bases.
 <br>
@@ -94,7 +94,7 @@ Real-time freshness verification and semantic drift detection engine for AI-gene
   </a>
 </div>
 <br>
-<b><a href="https://github.com/NERIS-v/INDAGO">INDAGO</a></b> &nbsp;·&nbsp; <a href="https://github.com/NERIS-v/INDAGO"><i>Repository ↗</i></a>
+<b>INDAGO</b> &nbsp; <a href="https://github.com/NERIS-v/INDAGO"><img src="./assets/badge-code.svg" height="18" alt="code" align="absmiddle" /></a>
 <br>
 Evidence-to-graph investigative intelligence system turning fragmented records into defensible, reviewable leads.
 <br>
@@ -111,7 +111,7 @@ Evidence-to-graph investigative intelligence system turning fragmented records i
   </a>
 </div>
 <br>
-<b><a href="https://github.com/Mayur11code/CUSTOS.dev">CUSTOS</a></b> &nbsp;·&nbsp; <a href="https://github.com/Mayur11code/CUSTOS.dev"><i>Repository ↗</i></a>
+<b>CUSTOS</b> &nbsp; <a href="https://github.com/Mayur11code/CUSTOS.dev"><img src="./assets/badge-code.svg" height="18" alt="code" align="absmiddle" /></a>
 <br>
 Human-in-the-loop OpenAI-compatible proxy inserting deterministic review and approval gates into autonomous AI coding workflows.
 <br>
@@ -126,7 +126,7 @@ Human-in-the-loop OpenAI-compatible proxy inserting deterministic review and app
   </a>
 </div>
 <br>
-<b><a href="https://github.com/Mankirat684/FuncUndo-side">FuncUndo</a></b> &nbsp;·&nbsp; <a href="https://github.com/Mankirat684/FuncUndo-side"><i>Repository ↗</i></a>
+<b>FuncUndo</b> &nbsp; <a href="https://github.com/Mankirat684/FuncUndo-side"><img src="./assets/badge-code.svg" height="18" alt="code" align="absmiddle" /></a>
 <br>
 The semantic code time machine for VS Code. Understands ASTs to track function logic changes and assess call-stack reversion risks.
 <br>
@@ -143,7 +143,7 @@ The semantic code time machine for VS Code. Understands ASTs to track function l
   </a>
 </div>
 <br>
-<b><a href="https://github.com/Mayur11code/LEXI-ASSIST">LEXI-ASSIST</a></b> &nbsp;·&nbsp; <a href="https://lexi-assist.vercel.app/"><i>Live Demo ↗</i></a>
+<b>LEXI-ASSIST</b> &nbsp; <a href="https://github.com/Mayur11code/LEXI-ASSIST"><img src="./assets/badge-code.svg" height="18" alt="code" align="absmiddle" /></a> &nbsp; <a href="https://lexi-assist.vercel.app/"><img src="./assets/badge-demo.svg" height="18" alt="live" align="absmiddle" /></a>
 <br>
 Intelligent legal advisor analyzing complex documents, automating structured workflows, and matching clients with lawyers.
 <br>

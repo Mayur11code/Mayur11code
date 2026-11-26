@@ -58,7 +58,7 @@ Deterministic evidence-intelligence platform & Research OS: retrieval → eviden
 
 <div align="center">
   <a href="https://github.com/Mayur11code/Forge">
-    <img src="./assets/9.png" width="240" alt="Forge — Multi-Tenant DAG Workflow Orchestration Engine" />
+    <img src="./assets/forge.png" width="240" alt="Forge — Multi-Tenant DAG Workflow Orchestration Engine" />
   </a>
 </div>
 <br>

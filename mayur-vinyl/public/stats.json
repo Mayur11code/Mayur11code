@@ -1,31 +1,27 @@
 {
-  "generatedAt": "2026-11-27T20:47:02.708Z",
+  "generatedAt": "2026-11-28T06:42:58.589Z",
   "window": {
-    "from": "2025-11-27",
-    "to": "2026-11-27"
+    "from": "2025-11-28",
+    "to": "2026-11-28"
   },
   "contributions": {
-    "total": 4446,
-    "activeDays": 284,
-    "thisYear": 4446,
-    "currentStreak": 4,
+    "total": 4447,
+    "activeDays": 285,
+    "thisYear": 4447,
+    "currentStreak": 5,
     "longestStreak": 87,
     "topRepo": {
-      "name": "Afterfact",
-      "count": 47
+      "name": "Forge",
+      "count": 34
     }
   },
   "profile": {
     "repositories": 33,
     "stars": 9,
-    "pullRequests": 352,
+    "pullRequests": 353,
     "followers": 30
   },
   "intensity": [
-    {
-      "d": "2026-08-22",
-      "c": 8
-    },
     {
       "d": "2026-08-23",
       "c": 2
@@ -413,6 +409,10 @@
     {
       "d": "2026-11-27",
       "c": 24
+    },
+    {
+      "d": "2026-11-28",
+      "c": 1
     }
   ]
 }

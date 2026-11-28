@@ -90,7 +90,7 @@ Real-time freshness verification and semantic drift detection engine for AI-gene
 
 <div align="center">
   <a href="https://github.com/NERIS-v/INDAGO">
-    <img src="./assets/9.png" width="240" alt="INDAGO — Evidence-to-Graph Investigative Intelligence" />
+    <img src="./assets/indago.png" width="240" alt="INDAGO — Evidence-to-Graph Investigative Intelligence" />
   </a>
 </div>
 <br>
